@@ -74,7 +74,7 @@
 		1001E2CE2D0B99030023A03C = {
 			isa = PBXGroup;
 			children = (
-				1001E2D92D0B99030023A03C /* paypal-ios-sdk-demo-app */,
+				1001E2D92D0B99030023A03C /* PayPalDemo */,
 				1001E2EA2D0B99120023A03C /* paypal-ios-sdk-demo-appTests */,
 				1001E2F42D0B99120023A03C /* paypal-ios-sdk-demo-appUITests */,
 				1001E2D82D0B99030023A03C /* Products */,
@@ -91,7 +91,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1001E2D92D0B99030023A03C /* paypal-ios-sdk-demo-app */ = {
+		1001E2D92D0B99030023A03C /* PayPalDemo */ = {
 			isa = PBXGroup;
 			children = (
 				1001E2DA2D0B99030023A03C /* paypal_ios_sdk_demo_appApp.swift */,
@@ -99,7 +99,7 @@
 				1001E2DE2D0B990F0023A03C /* Assets.xcassets */,
 				1001E2E02D0B990F0023A03C /* Preview Content */,
 			);
-			path = "paypal-ios-sdk-demo-app";
+			path = PayPalDemo;
 			sourceTree = "<group>";
 		};
 		1001E2E02D0B990F0023A03C /* Preview Content */ = {
