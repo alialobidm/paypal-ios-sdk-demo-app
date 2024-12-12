@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1001E2DB2D0B99030023A03C /* paypal_ios_sdk_demo_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2DA2D0B99030023A03C /* paypal_ios_sdk_demo_appApp.swift */; };
+		1001E2DB2D0B99030023A03C /* PayPalDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2DA2D0B99030023A03C /* PayPalDemoApp.swift */; };
 		1001E2DD2D0B99030023A03C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2DC2D0B99030023A03C /* ContentView.swift */; };
 		1001E2DF2D0B990F0023A03C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1001E2DE2D0B990F0023A03C /* Assets.xcassets */; };
 		1001E2E22D0B990F0023A03C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1001E2E12D0B990F0023A03C /* Preview Assets.xcassets */; };
@@ -35,7 +35,7 @@
 
 /* Begin PBXFileReference section */
 		1001E2D72D0B99030023A03C /* paypal-ios-sdk-demo-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "paypal-ios-sdk-demo-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1001E2DA2D0B99030023A03C /* paypal_ios_sdk_demo_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paypal_ios_sdk_demo_appApp.swift; sourceTree = "<group>"; };
+		1001E2DA2D0B99030023A03C /* PayPalDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPalDemoApp.swift; sourceTree = "<group>"; };
 		1001E2DC2D0B99030023A03C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1001E2DE2D0B990F0023A03C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1001E2E12D0B990F0023A03C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		1001E2D92D0B99030023A03C /* PayPalDemo */ = {
 			isa = PBXGroup;
 			children = (
-				1001E2DA2D0B99030023A03C /* paypal_ios_sdk_demo_appApp.swift */,
+				1001E2DA2D0B99030023A03C /* PayPalDemoApp.swift */,
 				1001E2DC2D0B99030023A03C /* ContentView.swift */,
 				1001E2DE2D0B990F0023A03C /* Assets.xcassets */,
 				1001E2E02D0B990F0023A03C /* Preview Content */,
@@ -258,7 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1001E2DD2D0B99030023A03C /* ContentView.swift in Sources */,
-				1001E2DB2D0B99030023A03C /* paypal_ios_sdk_demo_appApp.swift in Sources */,
+				1001E2DB2D0B99030023A03C /* PayPalDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,7 +421,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"paypal-ios-sdk-demo-app/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -434,7 +434,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "payaplMerchantDemo.com.paypal-ios-sdk-demo-app";
+				PRODUCT_BUNDLE_IDENTIFIER = com.paypal.ios.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -449,7 +449,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"paypal-ios-sdk-demo-app/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -462,7 +462,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "payaplMerchantDemo.com.paypal-ios-sdk-demo-app";
+				PRODUCT_BUNDLE_IDENTIFIER = com.paypal.ios.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -480,7 +480,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "payaplMerchantDemo.com.paypal-ios-sdk-demo-appTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.paypal.ios.DemoUnitITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -499,7 +499,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "payaplMerchantDemo.com.paypal-ios-sdk-demo-appTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.paypal.ios.DemoUnitITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -516,7 +516,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "payaplMerchantDemo.com.paypal-ios-sdk-demo-appUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.paypal.ios.DemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -533,7 +533,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "payaplMerchantDemo.com.paypal-ios-sdk-demo-appUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.paypal.ios.DemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
