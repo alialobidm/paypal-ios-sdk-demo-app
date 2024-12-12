@@ -12,7 +12,8 @@ Card payment processing integrated with the PayPal SDK.
 Showcasing PayPal Buttons
 
 Demonstrating how to integrate PayPal-branded buttons for various use cases.
-🎯 Purpose
+
+**🎯 Purpose**
 This demo app serves as a reference for merchants, aligning with real-world patterns and code structures they are likely to adopt. By providing a practical and easy-to-follow example, we aim to make PayPal SDK integration smoother and faster for developers.
 
 **📂 Project Structure**
@@ -34,7 +35,7 @@ PayPal iOS SDK
 Clone this repository:
 bash
 Copy code
-git clone https://github.com/yourusername/paypal-ios-sdk-demo-app.git
+git clone https://github.com/paypal-examples/paypal-ios-sdk-demo-app.git
 cd paypal-ios-sdk-demo-app
 Open the project in Xcode.
 Run the app on a simulator or device.
