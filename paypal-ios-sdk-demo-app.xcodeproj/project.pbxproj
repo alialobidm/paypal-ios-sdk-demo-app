@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		1001E2DB2D0B99030023A03C /* PayPalDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2DA2D0B99030023A03C /* PayPalDemoApp.swift */; };
-		1001E2DD2D0B99030023A03C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2DC2D0B99030023A03C /* ContentView.swift */; };
+		1001E2DD2D0B99030023A03C /* PayPalCheckoutFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2DC2D0B99030023A03C /* PayPalCheckoutFlow.swift */; };
 		1001E2DF2D0B990F0023A03C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1001E2DE2D0B990F0023A03C /* Assets.xcassets */; };
 		1001E2E22D0B990F0023A03C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1001E2E12D0B990F0023A03C /* Preview Assets.xcassets */; };
 		1001E2EC2D0B99120023A03C /* paypal_ios_sdk_demo_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2EB2D0B99120023A03C /* paypal_ios_sdk_demo_appTests.swift */; };
 		1001E2F62D0B99120023A03C /* paypal_ios_sdk_demo_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2F52D0B99120023A03C /* paypal_ios_sdk_demo_appUITests.swift */; };
 		1001E2F82D0B99120023A03C /* paypal_ios_sdk_demo_appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2F72D0B99120023A03C /* paypal_ios_sdk_demo_appUITestsLaunchTests.swift */; };
+		1001E3062D0CD8360023A03C /* CardCheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E3052D0CD8360023A03C /* CardCheckoutView.swift */; };
+		1001E3082D0CD8520023A03C /* OrderCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E3072D0CD8520023A03C /* OrderCompleteView.swift */; };
+		1001E30A2D0CF81D0023A03C /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E3092D0CF81D0023A03C /* CartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +39,7 @@
 /* Begin PBXFileReference section */
 		1001E2D72D0B99030023A03C /* paypal-ios-sdk-demo-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "paypal-ios-sdk-demo-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1001E2DA2D0B99030023A03C /* PayPalDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPalDemoApp.swift; sourceTree = "<group>"; };
-		1001E2DC2D0B99030023A03C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1001E2DC2D0B99030023A03C /* PayPalCheckoutFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPalCheckoutFlow.swift; sourceTree = "<group>"; };
 		1001E2DE2D0B990F0023A03C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1001E2E12D0B990F0023A03C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1001E2E72D0B99120023A03C /* paypal-ios-sdk-demo-appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "paypal-ios-sdk-demo-appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +47,9 @@
 		1001E2F12D0B99120023A03C /* paypal-ios-sdk-demo-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "paypal-ios-sdk-demo-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1001E2F52D0B99120023A03C /* paypal_ios_sdk_demo_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paypal_ios_sdk_demo_appUITests.swift; sourceTree = "<group>"; };
 		1001E2F72D0B99120023A03C /* paypal_ios_sdk_demo_appUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paypal_ios_sdk_demo_appUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1001E3052D0CD8360023A03C /* CardCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCheckoutView.swift; sourceTree = "<group>"; };
+		1001E3072D0CD8520023A03C /* OrderCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCompleteView.swift; sourceTree = "<group>"; };
+		1001E3092D0CF81D0023A03C /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +100,9 @@
 		1001E2D92D0B99030023A03C /* PayPalDemo */ = {
 			isa = PBXGroup;
 			children = (
+				1001E2DC2D0B99030023A03C /* PayPalCheckoutFlow.swift */,
 				1001E2DA2D0B99030023A03C /* PayPalDemoApp.swift */,
-				1001E2DC2D0B99030023A03C /* ContentView.swift */,
+				1001E3042D0CD7AD0023A03C /* CardCheckoutFlow */,
 				1001E2DE2D0B990F0023A03C /* Assets.xcassets */,
 				1001E2E02D0B990F0023A03C /* Preview Content */,
 			);
@@ -125,6 +132,16 @@
 				1001E2F72D0B99120023A03C /* paypal_ios_sdk_demo_appUITestsLaunchTests.swift */,
 			);
 			path = "paypal-ios-sdk-demo-appUITests";
+			sourceTree = "<group>";
+		};
+		1001E3042D0CD7AD0023A03C /* CardCheckoutFlow */ = {
+			isa = PBXGroup;
+			children = (
+				1001E3092D0CF81D0023A03C /* CartView.swift */,
+				1001E3052D0CD8360023A03C /* CardCheckoutView.swift */,
+				1001E3072D0CD8520023A03C /* OrderCompleteView.swift */,
+			);
+			path = CardCheckoutFlow;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,8 +274,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1001E2DD2D0B99030023A03C /* ContentView.swift in Sources */,
+				1001E30A2D0CF81D0023A03C /* CartView.swift in Sources */,
+				1001E2DD2D0B99030023A03C /* PayPalCheckoutFlow.swift in Sources */,
 				1001E2DB2D0B99030023A03C /* PayPalDemoApp.swift in Sources */,
+				1001E3082D0CD8520023A03C /* OrderCompleteView.swift in Sources */,
+				1001E3062D0CD8360023A03C /* CardCheckoutView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

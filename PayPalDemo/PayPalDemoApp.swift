@@ -5,7 +5,7 @@ import SwiftUI
 struct PayPalDemoApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PayPalCheckoutFlow()
         }
     }
 }
