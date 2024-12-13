@@ -14,6 +14,7 @@
 		1001E2EC2D0B99120023A03C /* paypal_ios_sdk_demo_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2EB2D0B99120023A03C /* paypal_ios_sdk_demo_appTests.swift */; };
 		1001E2F62D0B99120023A03C /* paypal_ios_sdk_demo_appUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2F52D0B99120023A03C /* paypal_ios_sdk_demo_appUITests.swift */; };
 		1001E2F82D0B99120023A03C /* paypal_ios_sdk_demo_appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2F72D0B99120023A03C /* paypal_ios_sdk_demo_appUITestsLaunchTests.swift */; };
+		1D694AFE2D0C9EE1005ED7C0 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D694AFD2D0C9EE1005ED7C0 /* CartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		1001E2F12D0B99120023A03C /* paypal-ios-sdk-demo-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "paypal-ios-sdk-demo-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1001E2F52D0B99120023A03C /* paypal_ios_sdk_demo_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paypal_ios_sdk_demo_appUITests.swift; sourceTree = "<group>"; };
 		1001E2F72D0B99120023A03C /* paypal_ios_sdk_demo_appUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paypal_ios_sdk_demo_appUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1D694AFD2D0C9EE1005ED7C0 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				1001E2DA2D0B99030023A03C /* PayPalDemoApp.swift */,
 				1001E2DC2D0B99030023A03C /* ContentView.swift */,
+				1D694AFD2D0C9EE1005ED7C0 /* CartView.swift */,
 				1001E2DE2D0B990F0023A03C /* Assets.xcassets */,
 				1001E2E02D0B990F0023A03C /* Preview Content */,
 			);
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1001E2DD2D0B99030023A03C /* ContentView.swift in Sources */,
+				1D694AFE2D0C9EE1005ED7C0 /* CartView.swift in Sources */,
 				1001E2DB2D0B99030023A03C /* PayPalDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
