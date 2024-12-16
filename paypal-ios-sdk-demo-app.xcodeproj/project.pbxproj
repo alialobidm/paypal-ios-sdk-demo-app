@@ -16,7 +16,7 @@
 		1001E2F82D0B99120023A03C /* paypal_ios_sdk_demo_appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2F72D0B99120023A03C /* paypal_ios_sdk_demo_appUITestsLaunchTests.swift */; };
 		1001E3062D0CD8360023A03C /* CardCheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E3052D0CD8360023A03C /* CardCheckoutView.swift */; };
 		1001E3082D0CD8520023A03C /* OrderCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E3072D0CD8520023A03C /* OrderCompleteView.swift */; };
-		1001E30A2D0CF81D0023A03C /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E3092D0CF81D0023A03C /* CartView.swift */; };
+		1D694AFE2D0C9EE1005ED7C0 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D694AFD2D0C9EE1005ED7C0 /* CartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +49,7 @@
 		1001E2F72D0B99120023A03C /* paypal_ios_sdk_demo_appUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paypal_ios_sdk_demo_appUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1001E3052D0CD8360023A03C /* CardCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCheckoutView.swift; sourceTree = "<group>"; };
 		1001E3072D0CD8520023A03C /* OrderCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCompleteView.swift; sourceTree = "<group>"; };
-		1001E3092D0CF81D0023A03C /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		1D694AFD2D0C9EE1005ED7C0 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +100,8 @@
 		1001E2D92D0B99030023A03C /* PayPalDemo */ = {
 			isa = PBXGroup;
 			children = (
-				1001E2DC2D0B99030023A03C /* PayPalCheckoutFlow.swift */,
 				1001E2DA2D0B99030023A03C /* PayPalDemoApp.swift */,
+				1001E2DC2D0B99030023A03C /* PayPalCheckoutFlow.swift */,
 				1001E3042D0CD7AD0023A03C /* CardCheckoutFlow */,
 				1001E2DE2D0B990F0023A03C /* Assets.xcassets */,
 				1001E2E02D0B990F0023A03C /* Preview Content */,
@@ -137,7 +137,7 @@
 		1001E3042D0CD7AD0023A03C /* CardCheckoutFlow */ = {
 			isa = PBXGroup;
 			children = (
-				1001E3092D0CF81D0023A03C /* CartView.swift */,
+				1D694AFD2D0C9EE1005ED7C0 /* CartView.swift */,
 				1001E3052D0CD8360023A03C /* CardCheckoutView.swift */,
 				1001E3072D0CD8520023A03C /* OrderCompleteView.swift */,
 			);
@@ -274,8 +274,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1001E30A2D0CF81D0023A03C /* CartView.swift in Sources */,
 				1001E2DD2D0B99030023A03C /* PayPalCheckoutFlow.swift in Sources */,
+				1001E2DD2D0B99030023A03C /* PayPalCheckoutFlow.swift in Sources */,
+				1D694AFE2D0C9EE1005ED7C0 /* CartView.swift in Sources */,
 				1001E2DB2D0B99030023A03C /* PayPalDemoApp.swift in Sources */,
 				1001E3082D0CD8520023A03C /* OrderCompleteView.swift in Sources */,
 				1001E3062D0CD8360023A03C /* CardCheckoutView.swift in Sources */,

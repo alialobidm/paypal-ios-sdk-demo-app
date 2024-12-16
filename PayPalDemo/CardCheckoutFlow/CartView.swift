@@ -2,16 +2,94 @@ import SwiftUI
 
 struct CartView: View {
     
+    var onPayWithPayPal: () -> Void
     var onPayWithCard: () -> Void
     
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            SubmitButton(title: "Pay with Card") {
-                onPayWithCard()
+    var body : some View {
+        VStack(alignment: .leading, spacing: 30) {
+            SectionHeader(title: "Cart")
+                .padding([.top, .leading])
+                .padding(.bottom, 25)
+            
+            VStack(alignment: .leading, spacing: 15){
+                HStack{
+                    Image(systemName: "tshirt")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(8)
+                    
+                    VStack(alignment: .leading) {
+                        Text("White T-Shirt")
+                            .font(.headline)
+                    }
+                    
+                    Spacer()
+                    
+                    Text("$29.99")
+                        .font(.headline)
+                }
+                .padding()
+                .background(Color.white.opacity(0.1))
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.black, lineWidth: 1)
+                )
             }
-            .padding(20)
+            .padding(.horizontal)
+            
+            Divider()
+                .padding(.vertical)
+                .padding(.horizontal)
+            
+            HStack {
+                Text("Total")
+                    .font(.title2)
+                Spacer()
+                
+                Text("$29.99")
+                    .font(.title2)
+            }
+            .padding(.horizontal)
+            
+            Spacer()
+            
+            
+            VStack(spacing: 10) {
+                Button(action: {
+                    onPayWithPayPal()
+                }){
+                    HStack {
+                        Image("paypal_color_monogram@3x")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 24, height: 24)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.yellow)
+                    .cornerRadius(10)
+                }
+                
+                Button(action: {
+                   onPayWithCard()
+                }) {
+                    Text("Pay with Card")
+                        .bold()
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.black)
+                        .cornerRadius(10)
+                }
+            }
+            .padding(.horizontal)
+            .padding(.bottom)
         }
-        .padding()
-        .background(Color.white)
+        .background(Color(.systemBackground))
+        .edgesIgnoringSafeArea(.bottom)
     }
 }

@@ -13,6 +13,8 @@ struct PayPalCheckoutFlow: View {
         NavigationStack(path: $navigationPath) {
             CartView {
                 navigationPath.append(.checkout)
+            } onPayWithCard: {
+                navigationPath.append(.checkout)
             }
             .navigationDestination(for: CheckoutStep.self) { step in
                 switch step {
