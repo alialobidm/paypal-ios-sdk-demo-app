@@ -5,7 +5,7 @@ import SwiftUI
 struct PayPalDemoApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CartView() //As this is the first screen provided in Screenshots(Figma)
         }
     }
 }
