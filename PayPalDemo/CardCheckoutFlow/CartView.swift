@@ -1,21 +1,15 @@
-//
-//  CartView.swift
-//  paypal-ios-sdk-demo-app
-//
-//  Created by Suraj Raju Dhopati on 12/13/24.
-//
-
-
 import SwiftUI
 
-
 struct CartView: View {
+    
+    var onPayWithPayPal: () -> Void
+    var onPayWithCard: () -> Void
+    
     var body : some View {
         VStack(alignment: .leading, spacing: 30) {
-            Text("Cart")
-                .font(.largeTitle)
+            SectionHeader(title: "Cart")
                 .padding([.top, .leading])
-            
+                .padding(.bottom, 25)
             
             VStack(alignment: .leading, spacing: 15){
                 HStack{
@@ -65,7 +59,9 @@ struct CartView: View {
             
             VStack(spacing: 10) {
                 Button(action: {
-                    //Make button action changes here (auth and navigate or alert?)
+                    DispatchQueue.global().async {
+                        onPayWithPayPal()
+                    }
                 }){
                     HStack {
                         Image("paypal_color_monogram@3x")
@@ -81,7 +77,7 @@ struct CartView: View {
                 }
                 
                 Button(action: {
-                    //Make card payments action here (auth and Navigate)
+                    onPayWithCard()
                 }) {
                     Text("Pay with Card")
                         .bold()
@@ -97,11 +93,5 @@ struct CartView: View {
         }
         .background(Color(.systemBackground))
         .edgesIgnoringSafeArea(.bottom)
-    }
-}
-
-struct CartView_Previews: PreviewProvider {
-    static var previews: some View {
-        CartView()
     }
 }
