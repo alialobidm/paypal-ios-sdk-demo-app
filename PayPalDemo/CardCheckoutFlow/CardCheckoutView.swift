@@ -10,6 +10,7 @@ struct CardCheckoutView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             SectionHeader(title: "Card Checkout")
+                .padding(.bottom, 25)
             CardInputField(placeholder: "Card Number", text: $cardNumber)
             HStack(spacing: 10) {
                 CardInputField(placeholder: "MM/YY", text: $expiryDate)
