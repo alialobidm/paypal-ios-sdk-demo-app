@@ -77,9 +77,7 @@ struct CartView: View {
                 }
                 
                 Button(action: {
-                    DispatchQueue.global().async {
-                        onPayWithCard()
-                    }
+                    onPayWithCard()
                 }) {
                     Text("Pay with Card")
                         .bold()

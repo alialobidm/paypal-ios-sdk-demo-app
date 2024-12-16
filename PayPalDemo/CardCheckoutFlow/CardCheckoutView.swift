@@ -19,9 +19,7 @@ struct CardCheckoutView: View {
             .padding(.trailing, 20)
             Spacer()
             SubmitButton(title: "Submit") {
-                DispatchQueue.global().async {
-                    onSubmit()
-                }
+                onSubmit()
             }
             .padding(20)
         }

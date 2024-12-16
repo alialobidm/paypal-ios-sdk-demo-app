@@ -12,7 +12,7 @@ struct PayPalCheckoutFlow: View {
     var body: some View {
         NavigationStack(path: $navigationPath) {
             CartView {
-                navigationPath.append(.checkout)
+                //TODO: Implement PayPal checkout flow
             } onPayWithCard: {
                 navigationPath.append(.checkout)
             }

@@ -15,9 +15,7 @@ struct OrderCompleteView: View {
             Spacer()
             
             SubmitButton(title: "Done", action: {
-                DispatchQueue.global().async {
-                    onDone()
-                }
+                onDone()
             })
         }
         .padding()
