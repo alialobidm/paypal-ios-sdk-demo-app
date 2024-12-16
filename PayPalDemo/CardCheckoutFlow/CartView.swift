@@ -59,7 +59,9 @@ struct CartView: View {
             
             VStack(spacing: 10) {
                 Button(action: {
-                    onPayWithPayPal()
+                    DispatchQueue.global().async {
+                        onPayWithPayPal()
+                    }
                 }){
                     HStack {
                         Image("paypal_color_monogram@3x")
@@ -75,7 +77,9 @@ struct CartView: View {
                 }
                 
                 Button(action: {
-                   onPayWithCard()
+                    DispatchQueue.global().async {
+                        onPayWithCard()
+                    }
                 }) {
                     Text("Pay with Card")
                         .bold()
