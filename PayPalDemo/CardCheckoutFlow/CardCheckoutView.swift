@@ -1,9 +1,11 @@
 import SwiftUI
 
 struct CardCheckoutView: View {
-    @State private var cardNumber = ""
-    @State private var expiryDate = ""
-    @State private var cvv = ""
+    @State private var cardNumber = "4111 1111 1111 1111"
+    @State private var expiryDate = "01 / 25"
+    @State private var cvv = "123"
+    
+    private let cardFormatter = CardFormatter()
     
     var onSubmit: () -> Void
     
@@ -12,9 +14,20 @@ struct CardCheckoutView: View {
             SectionHeader(title: "Card Checkout")
                 .padding(.bottom, 25)
             CardInputField(placeholder: "Card Number", text: $cardNumber)
+                .onChange(of: cardNumber) { _, newValue in
+                    cardNumber = cardFormatter.formatFieldWith(newValue, field: .cardNumber)
+                    // 4 digit cvv for amex
+                    cvv = CardType.unknown.getCardType(newValue) == .americanExpress ? "1234" : "123"
+                }
             HStack(spacing: 10) {
                 CardInputField(placeholder: "MM/YY", text: $expiryDate)
+                    .onChange(of: expiryDate) { _, newValue in
+                        expiryDate = cardFormatter.formatFieldWith(newValue, field: .expirationDate)
+                    }
                 CardInputField(placeholder: "CVV", text: $cvv)
+                    .onChange(of: cvv) { _, newValue in
+                        cvv = cardFormatter.formatFieldWith(newValue, field: .cvv)
+                    }
             }
             .padding(.trailing, 20)
             Spacer()
