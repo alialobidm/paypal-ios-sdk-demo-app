@@ -56,9 +56,13 @@ struct CardInputField: View {
     
     var body: some View {
         TextField(placeholder, text: $text)
-            .textFieldStyle(.roundedBorder)
+            .padding(10)
+            .background(Color.white)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.gray, lineWidth: 1)
+            )
             .padding(.trailing, 20)
-        
     }
 }
 
