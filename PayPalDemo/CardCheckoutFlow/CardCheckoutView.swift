@@ -16,7 +16,6 @@ struct CardCheckoutView: View {
             CardInputField(placeholder: "Card Number", text: $cardNumber)
                 .onChange(of: cardNumber) { _, newValue in
                     cardNumber = cardFormatter.formatFieldWith(newValue, field: .cardNumber)
-                    // 4 digit cvv for amex
                     cvv = CardType.unknown.getCardType(newValue) == .americanExpress ? "1234" : "123"
                 }
             HStack(spacing: 10) {
