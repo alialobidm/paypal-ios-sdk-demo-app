@@ -19,7 +19,7 @@ struct PayPalCheckoutFlow: View {
             .navigationDestination(for: CheckoutStep.self) { step in
                 switch step {
                 case .checkout:
-                    CardCheckoutView {
+                    CardCheckoutView { _ in
                         navigationPath.append(.complete)
                     }
                 case .complete:
