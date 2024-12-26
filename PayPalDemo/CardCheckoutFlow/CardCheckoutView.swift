@@ -6,6 +6,8 @@ struct CardCheckoutView: View {
     @State private var expirationDate = "01 / 25"
     @State private var cvv = "123"
     
+    let totalAmount: Double
+    
     @StateObject private var viewModel = CardCheckoutViewModel()
     @State private var showAlert: Bool = false
     
