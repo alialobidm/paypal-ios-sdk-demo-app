@@ -119,8 +119,8 @@
 				1001E3042D0CD7AD0023A03C /* CardCheckoutFlow */,
 				10A602A82D160F900008712F /* ViewModels */,
 				10A602A32D14D6880008712F /* Helpers */,
-				1001E2DE2D0B990F0023A03C /* Assets.xcassets */,
 				1001E2E02D0B990F0023A03C /* Preview Content */,
+				1001E2DE2D0B990F0023A03C /* Assets.xcassets */,
 			);
 			path = PayPalDemo;
 			sourceTree = "<group>";
