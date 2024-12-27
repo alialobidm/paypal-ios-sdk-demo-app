@@ -59,6 +59,7 @@ struct CardCheckoutView: View {
         
         viewModel.submitCard { card in
             if let card = card {
+                //TODO: Card Checkout
                 onSubmit(card)
             } else {
                 showAlert = true
