@@ -1,9 +1,15 @@
 import SwiftUI
+import CardPayments
 
 struct CardCheckoutView: View {
     @State private var cardNumber = "4111 1111 1111 1111"
-    @State private var expiryDate = "01 / 25"
+    @State private var expirationDate = "01 / 25"
     @State private var cvv = "123"
+    
+    let totalAmount: Double
+    
+    @StateObject private var viewModel = CardCheckoutViewModel()
+    @State private var showAlert: Bool = false
     
     private let cardFormatter = CardFormatter()
     
@@ -19,9 +25,9 @@ struct CardCheckoutView: View {
                     cvv = CardType.unknown.getCardType(newValue) == .americanExpress ? "1234" : "123"
                 }
             HStack(spacing: 10) {
-                CardInputField(placeholder: "MM/YY", text: $expiryDate)
-                    .onChange(of: expiryDate) { _, newValue in
-                        expiryDate = cardFormatter.formatFieldWith(newValue, field: .expirationDate)
+                CardInputField(placeholder: "MM/YY", text: $expirationDate)
+                    .onChange(of: expirationDate) { _, newValue in
+                        expirationDate = cardFormatter.formatFieldWith(newValue, field: .expirationDate)
                     }
                 CardInputField(placeholder: "CVV", text: $cvv)
                     .onChange(of: cvv) { _, newValue in
@@ -31,12 +37,34 @@ struct CardCheckoutView: View {
             .padding(.trailing, 20)
             Spacer()
             SubmitButton(title: "Submit") {
-                onSubmit()
+                handleSubmit()
             }
             .padding(20)
         }
         .padding()
         .background(Color.white)
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Error"),
+                message: Text(viewModel.errorMessage),
+                dismissButton: .default(Text("OK"))
+            )
+        }
+    }
+    
+    private func handleSubmit() {
+        viewModel.cardNumber = cardNumber
+        viewModel.expirationDate = expirationDate
+        viewModel.cvv = cvv
+        
+        viewModel.submitCard { card in
+            if let card = card {
+                //TODO: Card Checkout
+                onSubmit()
+            } else {
+                showAlert = true
+            }
+        }
     }
 }
 

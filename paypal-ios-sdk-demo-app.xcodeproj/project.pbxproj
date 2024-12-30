@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1001E2DB2D0B99030023A03C /* PayPalDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2DA2D0B99030023A03C /* PayPalDemoApp.swift */; };
-		1001E2DD2D0B99030023A03C /* PayPalCheckoutFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2DC2D0B99030023A03C /* PayPalCheckoutFlow.swift */; };
+		1001E2DD2D0B99030023A03C /* CheckoutFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2DC2D0B99030023A03C /* CheckoutFlow.swift */; };
 		1001E2DF2D0B990F0023A03C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1001E2DE2D0B990F0023A03C /* Assets.xcassets */; };
 		1001E2E22D0B990F0023A03C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1001E2E12D0B990F0023A03C /* Preview Assets.xcassets */; };
 		1001E2EC2D0B99120023A03C /* paypal_ios_sdk_demo_appTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2EB2D0B99120023A03C /* paypal_ios_sdk_demo_appTests.swift */; };
@@ -16,7 +16,12 @@
 		1001E2F82D0B99120023A03C /* paypal_ios_sdk_demo_appUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E2F72D0B99120023A03C /* paypal_ios_sdk_demo_appUITestsLaunchTests.swift */; };
 		1001E3062D0CD8360023A03C /* CardCheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E3052D0CD8360023A03C /* CardCheckoutView.swift */; };
 		1001E3082D0CD8520023A03C /* OrderCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1001E3072D0CD8520023A03C /* OrderCompleteView.swift */; };
+		1058F7E82D1DEF7400D5A7C1 /* FraudProtection in Frameworks */ = {isa = PBXBuildFile; productRef = 1058F7E72D1DEF7400D5A7C1 /* FraudProtection */; };
+		1058F7EC2D1DEF7400D5A7C1 /* PayPalWebPayments in Frameworks */ = {isa = PBXBuildFile; productRef = 1058F7EB2D1DEF7400D5A7C1 /* PayPalWebPayments */; };
 		10A602A52D14D69C0008712F /* CardFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A602A42D14D69C0008712F /* CardFormatter.swift */; };
+		10A602AA2D160FAB0008712F /* CardCheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A602A92D160FAB0008712F /* CardCheckoutViewModel.swift */; };
+		10A602AD2D1612C70008712F /* CardPayments in Frameworks */ = {isa = PBXBuildFile; productRef = 10A602AC2D1612C70008712F /* CardPayments */; };
+		10A602AF2D1612C70008712F /* CorePayments in Frameworks */ = {isa = PBXBuildFile; productRef = 10A602AE2D1612C70008712F /* CorePayments */; };
 		1D694AFE2D0C9EE1005ED7C0 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D694AFD2D0C9EE1005ED7C0 /* CartView.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +45,7 @@
 /* Begin PBXFileReference section */
 		1001E2D72D0B99030023A03C /* paypal-ios-sdk-demo-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "paypal-ios-sdk-demo-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1001E2DA2D0B99030023A03C /* PayPalDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPalDemoApp.swift; sourceTree = "<group>"; };
-		1001E2DC2D0B99030023A03C /* PayPalCheckoutFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPalCheckoutFlow.swift; sourceTree = "<group>"; };
+		1001E2DC2D0B99030023A03C /* CheckoutFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutFlow.swift; sourceTree = "<group>"; };
 		1001E2DE2D0B990F0023A03C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1001E2E12D0B990F0023A03C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1001E2E72D0B99120023A03C /* paypal-ios-sdk-demo-appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "paypal-ios-sdk-demo-appTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +56,7 @@
 		1001E3052D0CD8360023A03C /* CardCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCheckoutView.swift; sourceTree = "<group>"; };
 		1001E3072D0CD8520023A03C /* OrderCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCompleteView.swift; sourceTree = "<group>"; };
 		10A602A42D14D69C0008712F /* CardFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormatter.swift; sourceTree = "<group>"; };
+		10A602A92D160FAB0008712F /* CardCheckoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCheckoutViewModel.swift; sourceTree = "<group>"; };
 		1D694AFD2D0C9EE1005ED7C0 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,6 +65,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10A602AF2D1612C70008712F /* CorePayments in Frameworks */,
+				10A602AD2D1612C70008712F /* CardPayments in Frameworks */,
+				1058F7EC2D1DEF7400D5A7C1 /* PayPalWebPayments in Frameworks */,
+				1058F7E82D1DEF7400D5A7C1 /* FraudProtection in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,11 +113,12 @@
 			isa = PBXGroup;
 			children = (
 				1001E2DA2D0B99030023A03C /* PayPalDemoApp.swift */,
-				1001E2DC2D0B99030023A03C /* PayPalCheckoutFlow.swift */,
+				1001E2DC2D0B99030023A03C /* CheckoutFlow.swift */,
 				1001E3042D0CD7AD0023A03C /* CardCheckoutFlow */,
+				10A602A82D160F900008712F /* ViewModels */,
 				10A602A32D14D6880008712F /* Helpers */,
-				1001E2DE2D0B990F0023A03C /* Assets.xcassets */,
 				1001E2E02D0B990F0023A03C /* Preview Content */,
+				1001E2DE2D0B990F0023A03C /* Assets.xcassets */,
 			);
 			path = PayPalDemo;
 			sourceTree = "<group>";
@@ -155,6 +166,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		10A602A82D160F900008712F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				10A602A92D160FAB0008712F /* CardCheckoutViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -171,6 +190,12 @@
 			dependencies = (
 			);
 			name = "paypal-ios-sdk-demo-app";
+			packageProductDependencies = (
+				10A602AC2D1612C70008712F /* CardPayments */,
+				10A602AE2D1612C70008712F /* CorePayments */,
+				1058F7E72D1DEF7400D5A7C1 /* FraudProtection */,
+				1058F7EB2D1DEF7400D5A7C1 /* PayPalWebPayments */,
+			);
 			productName = "paypal-ios-sdk-demo-app";
 			productReference = 1001E2D72D0B99030023A03C /* paypal-ios-sdk-demo-app.app */;
 			productType = "com.apple.product-type.application";
@@ -243,6 +268,9 @@
 				Base,
 			);
 			mainGroup = 1001E2CE2D0B99030023A03C;
+			packageReferences = (
+				10A602AB2D1612C70008712F /* XCRemoteSwiftPackageReference "paypal-ios" */,
+			);
 			productRefGroup = 1001E2D82D0B99030023A03C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -285,8 +313,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1001E2DD2D0B99030023A03C /* PayPalCheckoutFlow.swift in Sources */,
-				1001E2DD2D0B99030023A03C /* PayPalCheckoutFlow.swift in Sources */,
+				1001E2DD2D0B99030023A03C /* CheckoutFlow.swift in Sources */,
+				1001E2DD2D0B99030023A03C /* CheckoutFlow.swift in Sources */,
+				10A602AA2D160FAB0008712F /* CardCheckoutViewModel.swift in Sources */,
 				1D694AFE2D0C9EE1005ED7C0 /* CartView.swift in Sources */,
 				1001E2DB2D0B99030023A03C /* PayPalDemoApp.swift in Sources */,
 				1001E3082D0CD8520023A03C /* OrderCompleteView.swift in Sources */,
@@ -615,6 +644,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		10A602AB2D1612C70008712F /* XCRemoteSwiftPackageReference "paypal-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/paypal/paypal-ios/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = "2.0.0-beta2";
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1058F7E72D1DEF7400D5A7C1 /* FraudProtection */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10A602AB2D1612C70008712F /* XCRemoteSwiftPackageReference "paypal-ios" */;
+			productName = FraudProtection;
+		};
+		1058F7EB2D1DEF7400D5A7C1 /* PayPalWebPayments */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10A602AB2D1612C70008712F /* XCRemoteSwiftPackageReference "paypal-ios" */;
+			productName = PayPalWebPayments;
+		};
+		10A602AC2D1612C70008712F /* CardPayments */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10A602AB2D1612C70008712F /* XCRemoteSwiftPackageReference "paypal-ios" */;
+			productName = CardPayments;
+		};
+		10A602AE2D1612C70008712F /* CorePayments */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10A602AB2D1612C70008712F /* XCRemoteSwiftPackageReference "paypal-ios" */;
+			productName = CorePayments;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1001E2CF2D0B99030023A03C /* Project object */;
 }

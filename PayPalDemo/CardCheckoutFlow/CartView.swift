@@ -1,9 +1,10 @@
 import SwiftUI
 
 struct CartView: View {
+    @State private var totalAmount: Double = 29.99
     
     var onPayWithPayPal: () -> Void
-    var onPayWithCard: () -> Void
+    var onPayWithCard: (Double) -> Void
     
     var body : some View {
         VStack(alignment: .leading, spacing: 30) {
@@ -27,7 +28,7 @@ struct CartView: View {
                     
                     Spacer()
                     
-                    Text("$29.99")
+                    Text("$\(totalAmount, specifier: "%.2f")")
                         .font(.headline)
                 }
                 .padding()
@@ -77,7 +78,7 @@ struct CartView: View {
                 }
                 
                 Button(action: {
-                    onPayWithCard()
+                    onPayWithCard(totalAmount)
                 }) {
                     Text("Pay with Card")
                         .bold()

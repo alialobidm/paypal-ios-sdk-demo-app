@@ -1,25 +1,25 @@
 import SwiftUI
 
-enum CheckoutStep {
+enum CheckoutStep: Hashable {
     case cart
-    case checkout
+    case checkout(amount: Double)
     case complete
 }
 
-struct PayPalCheckoutFlow: View {
+struct CheckoutFlow: View {
     @State private var navigationPath: [CheckoutStep] = []
     
     var body: some View {
         NavigationStack(path: $navigationPath) {
             CartView {
                 //TODO: Implement PayPal checkout flow
-            } onPayWithCard: {
-                navigationPath.append(.checkout)
+            } onPayWithCard: { totalAmount in
+                navigationPath.append(.checkout(amount: totalAmount))
             }
             .navigationDestination(for: CheckoutStep.self) { step in
                 switch step {
-                case .checkout:
-                    CardCheckoutView {
+                case .checkout(let amount):
+                    CardCheckoutView(totalAmount: amount) {
                         navigationPath.append(.complete)
                     }
                 case .complete:
@@ -35,5 +35,5 @@ struct PayPalCheckoutFlow: View {
 }
 
 #Preview {
-    PayPalCheckoutFlow()
+    CheckoutFlow()
 }
