@@ -19,7 +19,7 @@ struct CheckoutFlow: View {
             .navigationDestination(for: CheckoutStep.self) { step in
                 switch step {
                 case .checkout(let amount):
-                    CardCheckoutView(totalAmount: amount) { _ in
+                    CardCheckoutView(totalAmount: amount) {
                         navigationPath.append(.complete)
                     }
                 case .complete:
