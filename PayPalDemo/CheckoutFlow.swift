@@ -6,7 +6,7 @@ enum CheckoutStep: Hashable {
     case complete
 }
 
-struct PayPalCheckoutFlow: View {
+struct CheckoutFlow: View {
     @State private var navigationPath: [CheckoutStep] = []
     
     var body: some View {
@@ -35,5 +35,5 @@ struct PayPalCheckoutFlow: View {
 }
 
 #Preview {
-    PayPalCheckoutFlow()
+    CheckoutFlow()
 }
