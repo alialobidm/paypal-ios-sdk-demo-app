@@ -13,7 +13,7 @@ struct CardCheckoutView: View {
     
     private let cardFormatter = CardFormatter()
     
-    var onSubmit: (Card) -> Void
+    var onSubmit: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -60,7 +60,7 @@ struct CardCheckoutView: View {
         viewModel.submitCard { card in
             if let card = card {
                 //TODO: Card Checkout
-                onSubmit(card)
+                onSubmit()
             } else {
                 showAlert = true
             }
