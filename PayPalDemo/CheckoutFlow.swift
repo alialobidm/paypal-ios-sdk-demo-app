@@ -1,38 +1,57 @@
 import SwiftUI
 
 enum CheckoutStep: Hashable {
-    case cart
     case checkout(amount: Double)
-    case complete
+    case complete(orderID: String)
 }
 
 struct CheckoutFlow: View {
     @State private var navigationPath: [CheckoutStep] = []
-    
+    @StateObject private var cardPaymentViewModel = CardPaymentViewModel()
+    @State private var selectedIntent: Intent = .authorize
+
     var body: some View {
         NavigationStack(path: $navigationPath) {
-            CartView {
-                //TODO: Implement PayPal checkout flow
-            } onPayWithCard: { totalAmount in
-                navigationPath.append(.checkout(amount: totalAmount))
-            }
-            .navigationDestination(for: CheckoutStep.self) { step in
-                switch step {
-                case .checkout(let amount):
-                    CardCheckoutView(totalAmount: amount) {
-                        navigationPath.append(.complete)
+            CartView(
+                onPayWithPayPal: handlePayPalCheckout,
+                onPayWithCard: handleCardCheckout
+            )
+            .navigationDestination(for: CheckoutStep.self, destination: buildDestination)
+        }
+    }
+
+    private func handlePayPalCheckout() {
+        // TODO: Implement PayPal checkout flow
+    }
+
+    private func handleCardCheckout(totalAmount: Double) {
+        navigationPath.append(.checkout(amount: totalAmount))
+    }
+
+    @ViewBuilder
+    private func buildDestination(for step: CheckoutStep) -> some View {
+        switch step {
+        case .checkout(let amount):
+            CardCheckoutView(
+                cardPaymentViewModel: cardPaymentViewModel, 
+                selectedIntent: selectedIntent,
+                orderID: cardPaymentViewModel.state.createOrder?.id ?? "",
+                totalAmount: amount,
+                onSubmit: {
+                    if let order = cardPaymentViewModel.state.createOrder {
+                        navigationPath.append(.complete(orderID: order.id))
                     }
-                case .complete:
-                    OrderCompleteView {
-                        navigationPath = []
-                    }
-                default:
-                    EmptyView()
                 }
+            )
+
+        case .complete(let orderID):
+            OrderCompleteView(orderID: orderID) {
+                navigationPath = []
             }
         }
     }
 }
+
 
 #Preview {
     CheckoutFlow()

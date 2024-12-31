@@ -1,7 +1,7 @@
 import Foundation
 import CardPayments
 
-class CardCheckoutViewModel: ObservableObject {
+class CardCheckoutVlidationViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     var cardNumber: String = ""
     var expirationDate: String = ""
@@ -11,7 +11,7 @@ class CardCheckoutViewModel: ObservableObject {
         Card.isCardFormValid(cardNumber: cardNumber, expirationDate: expirationDate, cvv: cvv)
     }
     
-    func submitCard(completion: (Card?) -> Void) {
+    func isCardValid(completion: (Card?) -> Void) {
         if isValid {
             let card = Card.createCard(cardNumber: cardNumber, expirationDate: expirationDate, cvv: cvv)
             completion(card)
