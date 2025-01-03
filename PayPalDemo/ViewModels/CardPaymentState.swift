@@ -48,4 +48,8 @@ struct CardPaymentState: Equatable {
             }
         }
     }
+    
+    var createOrderID: String? {
+        createOrder?.id
+    }
 }

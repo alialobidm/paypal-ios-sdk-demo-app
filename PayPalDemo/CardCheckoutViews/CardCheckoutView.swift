@@ -2,23 +2,20 @@ import SwiftUI
 import CardPayments
 
 struct CardCheckoutView: View {
-    @ObservedObject var cardPaymentViewModel: CardPaymentViewModel
-    @State private var cardNumber = "4111 1111 1111 1111"
-    @State private var expirationDate = "01 / 25"
-    @State private var cvv = "123"
-    
-    let selectedIntent: Intent
-    let orderID: String
-    let totalAmount: Double
-    
-    @StateObject private var cardValidationViewModel = CardCheckoutValidationViewModel()
+    @ObservedObject var viewModel: CardPaymentViewModel
+    let amount: Double
+    let intent: String
+    let onOrderCompleted: (String) -> Void
+
+    @StateObject private var validationViewModel = CardCheckoutValidationViewModel()
+    @State private var cardNumber: String = "4111 1111 1111 1111"
+    @State private var expirationDate: String = "01 / 25"
+    @State private var cvv: String = "123"
     @State private var showAlert: Bool = false
-    @State var isLoading: Bool = false
+    @State private var isLoading: Bool = false
     
     private let cardFormatter = CardFormatter()
-    
-    var onSubmit: () -> Void
-    
+
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 16) {
@@ -51,7 +48,7 @@ struct CardCheckoutView: View {
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Error"),
-                    message: Text(cardValidationViewModel.errorMessage),
+                    message: Text(validationViewModel.errorMessage),
                     dismissButton: .default(Text("OK"))
                 )
             }
@@ -65,64 +62,35 @@ struct CardCheckoutView: View {
             }
         }
     }
-    
+
     private func handleSubmit() {
-        cardValidationViewModel.cardNumber = cardNumber
-        cardValidationViewModel.expirationDate = expirationDate
-        cardValidationViewModel.cvv = cvv
+        validationViewModel.cardNumber = cardNumber
+        validationViewModel.expirationDate = expirationDate
+        validationViewModel.cvv = cvv
         
+        guard validationViewModel.isValid else {
+            showAlert = true
+            
+            return
+        }
         isLoading = true
-        
         Task {
             do {
-                try await cardPaymentViewModel.createOrder(
-                    amount: "\(totalAmount)",
+                try await viewModel.createOrder(
+                    amount: "\(amount)", 
                     selectedMerchantIntegration: DemoSettings.merchantIntegration,
-                    intent: selectedIntent.rawValue,
-                    shouldVault: false,
-                    customerID: nil
+                    intent: intent,
+                    shouldVault: false
                 )
-                
-                guard let orderID = cardPaymentViewModel.state.createOrder?.id else {
-                    print("Error: Order ID is nil after createOrder.")
+                if let orderID = viewModel.state.createOrderID {
+                    onOrderCompleted(orderID)
+                } else {
                     showAlert = true
-                    isLoading = false
-                    return
-                }
-                
-                cardValidationViewModel.isCardValid { card in
-                    if let card = card {
-                        Task {
-                            do {
-                                await cardPaymentViewModel.checkoutWith(
-                                    card: card,
-                                    orderID: orderID,
-                                    sca: cardPaymentViewModel.state.scaSelection,
-                                    completion: { result in
-                                        switch result {
-                                        case .success(let cardResult):
-                                            print("Checkout succeeded with order ID: \(cardResult.id)")
-                                            isLoading = false
-                                            onSubmit()
-                                        case .failure(let error):
-                                            print("Checkout failed: \(error.localizedDescription)")
-                                            showAlert = true
-                                            isLoading = false
-                                        }
-                                    }
-                                )
-                            }
-                        }
-                    } else {
-                        showAlert = true
-                        isLoading = false
-                    }
                 }
             } catch {
-                print("Error in creating order: \(error.localizedDescription)")
                 showAlert = true
-                isLoading = false
             }
+            isLoading = false
         }
     }
 }

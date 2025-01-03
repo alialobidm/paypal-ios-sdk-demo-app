@@ -11,12 +11,8 @@ struct OrderCompleteView: View {
             Text("Thank you for your order! Your order number is \(orderID)")
                 .font(.subheadline)
                 .padding(.bottom)
-            
             Spacer()
-            
-            SubmitButton(title: "Done", action: {
-                onDone()
-            })
+            SubmitButton(title: "Done", action: onDone)
         }
         .padding()
         .background(Color.white)

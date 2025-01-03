@@ -4,7 +4,7 @@ struct CartView: View {
     @State private var totalAmount: Double = 29.99
     var onPayWithPayPal: () -> Void
     var onPayWithCard: (Double) -> Void
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
             Text("Cart")
@@ -26,11 +26,8 @@ struct CartView: View {
                     title: "Pay with PayPal",
                     imageName: "paypal_color_monogram@3x",
                     backgroundColor: Color.yellow,
-                    action: {
-                        DispatchQueue.global().async {
-                            onPayWithPayPal()
-                        }
-                    })
+                    action: onPayWithPayPal
+                )
                 
                 PaymentButton(
                     title: "Pay with Card",
@@ -38,7 +35,8 @@ struct CartView: View {
                     backgroundColor: Color.black,
                     action: {
                         onPayWithCard(totalAmount)
-                    })
+                    }
+                )
             }
             .padding(.horizontal)
             .padding(.bottom, 40)

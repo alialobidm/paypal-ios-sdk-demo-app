@@ -6,52 +6,38 @@ enum CheckoutStep: Hashable {
 }
 
 struct CheckoutFlow: View {
-    @State private var navigationPath: [CheckoutStep] = []
-    @StateObject private var cardPaymentViewModel = CardPaymentViewModel()
-    @State private var selectedIntent: Intent = .authorize
+    @StateObject private var coordinator = CheckoutCoordinator()
 
     var body: some View {
-        NavigationStack(path: $navigationPath) {
+        NavigationStack(path: $coordinator.navigationPath) {
             CartView(
-                onPayWithPayPal: handlePayPalCheckout,
-                onPayWithCard: handleCardCheckout
-            )
-            .navigationDestination(for: CheckoutStep.self, destination: buildDestination)
-        }
-    }
-
-    private func handlePayPalCheckout() {
-        // TODO: Implement PayPal checkout flow
-    }
-
-    private func handleCardCheckout(totalAmount: Double) {
-        navigationPath.append(.checkout(amount: totalAmount))
-    }
-
-    @ViewBuilder
-    private func buildDestination(for step: CheckoutStep) -> some View {
-        switch step {
-        case .checkout(let amount):
-            CardCheckoutView(
-                cardPaymentViewModel: cardPaymentViewModel, 
-                selectedIntent: selectedIntent,
-                orderID: cardPaymentViewModel.state.createOrder?.id ?? "",
-                totalAmount: amount,
-                onSubmit: {
-                    if let order = cardPaymentViewModel.state.createOrder {
-                        navigationPath.append(.complete(orderID: order.id))
-                    }
+                onPayWithPayPal: coordinator.startPayPalCheckout,
+                onPayWithCard: { amount in
+                    coordinator.startCardCheckout(amount: amount)
                 }
             )
-
-        case .complete(let orderID):
-            OrderCompleteView(orderID: orderID) {
-                navigationPath = []
+            .navigationDestination(for: CheckoutStep.self) { step in
+                switch step {
+                case .checkout(let amount):
+                    if let viewModel = coordinator.cardPaymentViewModel {
+                        CardCheckoutView(
+                            viewModel: viewModel,
+                            amount: amount,
+                            intent: coordinator.selectedIntent.rawValue,
+                            onOrderCompleted: { orderID in
+                                coordinator.completeOrder(orderID: orderID)
+                            }
+                        )
+                    }
+                case .complete(let orderID):
+                    OrderCompleteView(orderID: orderID) {
+                        coordinator.reset()
+                    }
+                }
             }
         }
     }
 }
-
 
 #Preview {
     CheckoutFlow()
