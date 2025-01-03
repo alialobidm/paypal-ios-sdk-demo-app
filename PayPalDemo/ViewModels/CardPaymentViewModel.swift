@@ -14,33 +14,15 @@ class CardPaymentViewModel: ObservableObject {
         amount: String,
         selectedMerchantIntegration: MerchantIntegration,
         intent: String,
-        shouldVault: Bool,
         customerID: String? = nil
     ) async throws {
 
         let amountRequest = Amount(currencyCode: "USD", value: amount)
 
-        var vaultCardPaymentSource: VaultCardPaymentSource?
-        if shouldVault {
-            var customer: Customer?
-            if let customerID {
-                customer = Customer(id: customerID)
-            }
-            let attributes = Attributes(vault: Vault(storeInVault: "ON_SUCCESS"), customer: customer)
-            let card = VaultCard(attributes: attributes)
-            vaultCardPaymentSource = VaultCardPaymentSource(card: card)
-        }
-
-        var vaultPaymentSource: VaultPaymentSource?
-        if let vaultCardPaymentSource {
-            vaultPaymentSource = .card(vaultCardPaymentSource)
-        }
-
         let orderRequestParams = CreateOrderParams(
             applicationContext: nil,
             intent: intent,
-            purchaseUnits: [PurchaseUnit(amount: amountRequest)],
-            paymentSource: vaultPaymentSource
+            purchaseUnits: [PurchaseUnit(amount: amountRequest)]
         )
 
         do {

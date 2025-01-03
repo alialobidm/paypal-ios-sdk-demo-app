@@ -74,18 +74,6 @@ public enum CardError {
         errorDescription: "3DS verification has been canceled by the user."
     )
 
-    public static let noVaultTokenDataError = CoreSDKError(
-        code: Code.noVaultTokenDataError.rawValue,
-        domain: domain,
-        errorDescription: "No data was returned from update setup token service."
-    )
-    
-    public static let vaultTokenError = CoreSDKError(
-        code: Code.vaultTokenError.rawValue,
-        domain: domain,
-        errorDescription: "An error occurred while vaulting a card."
-    )
-
     public static let nilGraphQLClientError = CoreSDKError(
         code: Code.nilGraphQLClientError.rawValue,
         domain: domain,

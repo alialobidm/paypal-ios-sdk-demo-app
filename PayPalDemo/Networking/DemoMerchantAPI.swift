@@ -20,7 +20,7 @@ final class DemoMerchantAPI {
         paymentSourceType: PaymentSourceType
     ) async throws -> CreateSetupTokenResponse {
         do {
-            let requestBody = CreateSetupTokenParam(customer: VaultCustomer(id: customerID), paymentSource: paymentSourceType)
+            let requestBody = CreateSetupTokenParam(paymentSource: paymentSourceType)
 
             guard let url = buildBaseURL(with: "/setup_tokens") else {
                 throw URLResponseError.invalidURL

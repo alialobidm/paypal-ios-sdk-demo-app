@@ -79,8 +79,7 @@ struct CardCheckoutView: View {
                 try await viewModel.createOrder(
                     amount: "\(amount)", 
                     selectedMerchantIntegration: DemoSettings.merchantIntegration,
-                    intent: intent,
-                    shouldVault: false
+                    intent: intent
                 )
                 if let orderID = viewModel.state.createOrderID {
                     onOrderCompleted(orderID)

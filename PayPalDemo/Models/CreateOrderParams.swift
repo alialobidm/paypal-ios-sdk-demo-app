@@ -3,7 +3,6 @@ struct CreateOrderParams: Encodable {
     let applicationContext: ApplicationContext?
     let intent: String
     var purchaseUnits: [PurchaseUnit]?
-    var paymentSource: VaultPaymentSource?
 }
 
 struct ApplicationContext: Codable {
@@ -14,73 +13,6 @@ struct ApplicationContext: Codable {
     enum CodingKeys: String, CodingKey {
         case userAction
         case shippingPreference
-    }
-}
-
-enum VaultPaymentSource: Encodable {
-    case card(VaultCardPaymentSource)
-    case paypal(VaultPayPalPaymentSource)
-
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case .card(let cardSource):
-            try container.encode(cardSource)
-        case .paypal(let paypalSource):
-            try container.encode(paypalSource)
-        }
-    }
-}
-
-struct VaultPayPalPaymentSource: Encodable {
-
-    let paypal: VaultPayPal
-}
-
-struct VaultPayPal: Encodable {
-
-    let attributes: Attributes
-    let experienceContext: ExperienceContext
-}
-
-struct ExperienceContext: Encodable {
-
-    // these fields are not encoded for our SDK but are required for create order with PayPal vault option
-    let returnURL: String
-    let cancelURL: String
-}
-
-struct VaultCardPaymentSource: Encodable {
-
-    let card: VaultCard
-}
-
-struct VaultCard: Encodable {
-
-    let attributes: Attributes
-}
-
-struct Attributes: Encodable {
-
-    let vault: Vault
-    let customer: Customer?
-
-    init(vault: Vault, customer: Customer? = nil) {
-        self.vault = vault
-        self.customer = customer
-    }
-}
-
-struct Vault: Encodable {
-
-    let storeInVault: String
-    let usageType: String?
-    let customerType: String?
-
-    init(storeInVault: String, usageType: String? = nil, customerType: String? = nil) {
-        self.storeInVault = storeInVault
-        self.usageType = usageType
-        self.customerType = customerType
     }
 }
 
