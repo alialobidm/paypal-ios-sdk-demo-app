@@ -153,7 +153,7 @@
 				1058F81D2D1F156600D5A7C1 /* Models */,
 				1058F81A2D1F151700D5A7C1 /* Networking */,
 				1058F8192D1F14A000D5A7C1 /* ConfigSettings */,
-				1001E3042D0CD7AD0023A03C /* CardCheckoutFlow */,
+				1001E3042D0CD7AD0023A03C /* CardCheckoutViews */,
 				10A602A82D160F900008712F /* ViewModels */,
 				1058F8402D24602200D5A7C1 /* Vault */,
 				10A602A32D14D6880008712F /* Helpers */,
@@ -189,14 +189,14 @@
 			path = "paypal-ios-sdk-demo-appUITests";
 			sourceTree = "<group>";
 		};
-		1001E3042D0CD7AD0023A03C /* CardCheckoutFlow */ = {
+		1001E3042D0CD7AD0023A03C /* CardCheckoutViews */ = {
 			isa = PBXGroup;
 			children = (
 				1D694AFD2D0C9EE1005ED7C0 /* CartView.swift */,
 				1001E3052D0CD8360023A03C /* CardCheckoutView.swift */,
 				1001E3072D0CD8520023A03C /* OrderCompleteView.swift */,
 			);
-			path = CardCheckoutFlow;
+			path = CardCheckoutViews;
 			sourceTree = "<group>";
 		};
 		1058F8192D1F14A000D5A7C1 /* ConfigSettings */ = {

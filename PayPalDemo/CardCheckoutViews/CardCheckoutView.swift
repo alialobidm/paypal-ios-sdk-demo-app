@@ -11,7 +11,7 @@ struct CardCheckoutView: View {
     let orderID: String
     let totalAmount: Double
     
-    @StateObject private var cardValidationViewModel = CardCheckoutVlidationViewModel()
+    @StateObject private var cardValidationViewModel = CardCheckoutValidationViewModel()
     @State private var showAlert: Bool = false
     @State var isLoading: Bool = false
     

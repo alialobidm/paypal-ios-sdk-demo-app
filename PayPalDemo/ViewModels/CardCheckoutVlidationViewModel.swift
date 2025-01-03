@@ -1,7 +1,7 @@
 import Foundation
 import CardPayments
 
-class CardCheckoutVlidationViewModel: ObservableObject {
+class CardCheckoutValidationViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     var cardNumber: String = ""
     var expirationDate: String = ""
