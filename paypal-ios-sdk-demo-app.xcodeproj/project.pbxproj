@@ -35,7 +35,7 @@
 		1058F8312D1F207600D5A7C1 /* CreateOrderParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8302D1F207600D5A7C1 /* CreateOrderParams.swift */; };
 		1058F8332D1F20E700D5A7C1 /* ClientIDRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8322D1F20E700D5A7C1 /* ClientIDRequest.swift */; };
 		1058F83F2D245F7200D5A7C1 /* CardError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F83E2D245F7200D5A7C1 /* CardError.swift */; };
-		1058F8422D24604000D5A7C1 /* VaultState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8412D24604000D5A7C1 /* VaultState.swift */; };
+		1058F8422D24604000D5A7C1 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8412D24604000D5A7C1 /* LoadingState.swift */; };
 		1058F84A2D28602E00D5A7C1 /* PayPalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8492D28602E00D5A7C1 /* PayPalViewModel.swift */; };
 		1058F84C2D2860A800D5A7C1 /* CheckoutCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F84B2D2860A800D5A7C1 /* CheckoutCoordinator.swift */; };
 		10A602A52D14D69C0008712F /* CardFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A602A42D14D69C0008712F /* CardFormatter.swift */; };
@@ -92,7 +92,7 @@
 		1058F8302D1F207600D5A7C1 /* CreateOrderParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrderParams.swift; sourceTree = "<group>"; };
 		1058F8322D1F20E700D5A7C1 /* ClientIDRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientIDRequest.swift; sourceTree = "<group>"; };
 		1058F83E2D245F7200D5A7C1 /* CardError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardError.swift; sourceTree = "<group>"; };
-		1058F8412D24604000D5A7C1 /* VaultState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultState.swift; sourceTree = "<group>"; };
+		1058F8412D24604000D5A7C1 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
 		1058F8492D28602E00D5A7C1 /* PayPalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPalViewModel.swift; sourceTree = "<group>"; };
 		1058F84B2D2860A800D5A7C1 /* CheckoutCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutCoordinator.swift; sourceTree = "<group>"; };
 		10A602A42D14D69C0008712F /* CardFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormatter.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 				1058F8192D1F14A000D5A7C1 /* ConfigSettings */,
 				1001E3042D0CD7AD0023A03C /* CardCheckoutViews */,
 				10A602A82D160F900008712F /* ViewModels */,
-				1058F8402D24602200D5A7C1 /* Vault */,
+				1058F8402D24602200D5A7C1 /* StateManagement */,
 				10A602A32D14D6880008712F /* Helpers */,
 				1058F83D2D245F6800D5A7C1 /* CardError */,
 				1001E2E02D0B990F0023A03C /* Preview Content */,
@@ -248,12 +248,12 @@
 			path = CardError;
 			sourceTree = "<group>";
 		};
-		1058F8402D24602200D5A7C1 /* Vault */ = {
+		1058F8402D24602200D5A7C1 /* StateManagement */ = {
 			isa = PBXGroup;
 			children = (
-				1058F8412D24604000D5A7C1 /* VaultState.swift */,
+				1058F8412D24604000D5A7C1 /* LoadingState.swift */,
 			);
-			path = Vault;
+			path = StateManagement;
 			sourceTree = "<group>";
 		};
 		10A602A32D14D6880008712F /* Helpers */ = {
@@ -422,7 +422,7 @@
 				1058F84A2D28602E00D5A7C1 /* PayPalViewModel.swift in Sources */,
 				1058F82B2D1F1FE200D5A7C1 /* PaymentTokenResponse.swift in Sources */,
 				1058F8182D1F12C900D5A7C1 /* Environment.swift in Sources */,
-				1058F8422D24604000D5A7C1 /* VaultState.swift in Sources */,
+				1058F8422D24604000D5A7C1 /* LoadingState.swift in Sources */,
 				1001E2DD2D0B99030023A03C /* CheckoutFlow.swift in Sources */,
 				1058F82D2D1F202E00D5A7C1 /* PaymentTokenParam.swift in Sources */,
 				1058F8252D1F1EDC00D5A7C1 /* CardPaymentState.swift in Sources */,
