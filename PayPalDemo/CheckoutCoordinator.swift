@@ -4,7 +4,7 @@ class CheckoutCoordinator: ObservableObject {
     @Published var navigationPath: [CheckoutStep] = []
     @Published var cardPaymentViewModel: CardPaymentViewModel?
     @Published var payPalViewModel: PayPalViewModel?
-    @Published var selectedIntent: Intent = .authorize
+    @Published var selectedIntent: Intent = .capture
     
     func startCardCheckout(amount: Double) {
         DispatchQueue.main.async {
