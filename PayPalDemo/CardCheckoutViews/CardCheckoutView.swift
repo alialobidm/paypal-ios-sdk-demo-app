@@ -77,12 +77,26 @@ struct CardCheckoutView: View {
         Task {
             do {
                 try await viewModel.createOrder(
-                    amount: "\(amount)", 
+                    amount: "\(amount)",
                     selectedMerchantIntegration: DemoSettings.merchantIntegration,
                     intent: intent
                 )
                 if let orderID = viewModel.state.createOrderID {
-                    onOrderCompleted(orderID)
+                    let card = Card.createCard(
+                        cardNumber: cardNumber,
+                        expirationDate: expirationDate,
+                        cvv: cvv
+                    )
+                    
+                    await viewModel.checkoutWith(card: card, orderID: orderID, sca: viewModel.state.scaSelection) { result in
+                        switch result {
+                        case .success(let cardResult):
+                            onOrderCompleted(orderID)
+                        case .failure(let error):
+                            showAlert = true
+                            print("Checkout failed with error: \(error)")
+                        }
+                    }
                 } else {
                     showAlert = true
                 }

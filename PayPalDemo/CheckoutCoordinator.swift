@@ -5,24 +5,32 @@ class CheckoutCoordinator: ObservableObject {
     @Published var cardPaymentViewModel: CardPaymentViewModel?
     @Published var payPalViewModel: PayPalViewModel?
     @Published var selectedIntent: Intent = .authorize
-
+    
     func startCardCheckout(amount: Double) {
-        cardPaymentViewModel = CardPaymentViewModel()
-        navigationPath.append(.checkout(amount: amount))
+        DispatchQueue.main.async {
+            self.cardPaymentViewModel = CardPaymentViewModel()
+            self.navigationPath.append(.checkout(amount: amount))
+        }
     }
-
+    
     func startPayPalCheckout() {
-        payPalViewModel = PayPalViewModel()
-        payPalViewModel?.startCheckout()
+        DispatchQueue.main.async {
+            self.payPalViewModel = PayPalViewModel()
+            self.payPalViewModel?.startCheckout()
+        }
     }
-
+    
     func completeOrder(orderID: String) {
-        navigationPath.append(.complete(orderID: orderID))
+        DispatchQueue.main.async {
+            self.navigationPath.append(.complete(orderID: orderID))
+        }
     }
-
+    
     func reset() {
-        navigationPath.removeAll()
-        cardPaymentViewModel = nil
-        payPalViewModel = nil
+        DispatchQueue.main.async {
+            self.navigationPath.removeAll()
+            self.cardPaymentViewModel = nil
+            self.payPalViewModel = nil
+        }
     }
 }
