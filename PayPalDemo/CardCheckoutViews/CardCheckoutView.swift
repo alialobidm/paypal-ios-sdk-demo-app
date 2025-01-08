@@ -5,7 +5,7 @@ struct CardCheckoutView: View {
     @ObservedObject var viewModel: CardPaymentViewModel
     let amount: Double
     let intent: String
-    let onOrderCompleted: (String) -> Void
+    let onCheckoutCompleted: (String) -> Void
 
     @StateObject private var validationViewModel = CardCheckoutValidationViewModel()
     @State private var cardNumber: String = "4111 1111 1111 1111"
@@ -91,7 +91,7 @@ struct CardCheckoutView: View {
                     await viewModel.checkoutWith(card: card, orderID: orderID, sca: viewModel.state.scaSelection) { result in
                         switch result {
                         case .success(let cardResult):
-                            onOrderCompleted(orderID)
+                            onCheckoutCompleted(cardResult.id)
                         case .failure(let error):
                             showAlert = true
                             print("Checkout failed with error: \(error)")

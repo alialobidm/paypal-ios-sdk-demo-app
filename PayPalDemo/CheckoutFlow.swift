@@ -24,7 +24,7 @@ struct CheckoutFlow: View {
                             viewModel: viewModel,
                             amount: amount,
                             intent: coordinator.selectedIntent.rawValue,
-                            onOrderCompleted: { orderID in
+                            onCheckoutCompleted: { orderID in
                                 coordinator.completeOrder(orderID: orderID)
                             }
                         )

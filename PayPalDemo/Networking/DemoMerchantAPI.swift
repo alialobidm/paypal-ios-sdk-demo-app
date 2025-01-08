@@ -134,6 +134,7 @@ final class DemoMerchantAPI {
 
     private func buildURLRequest<T>(method: String, url: URL, body: T) -> URLRequest where T: Encodable {
         let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
