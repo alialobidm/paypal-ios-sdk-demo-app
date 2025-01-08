@@ -15,9 +15,8 @@ class CardPaymentViewModel: ObservableObject {
         amount: String,
         intent: String,
         selectedMerchantIntegration: MerchantIntegration,
-        sca: SCA,
-        completion: @escaping (Result<CardPaymentState.CardResult, Error>) -> Void
-    ) async {
+        sca: SCA
+    ) async throws -> CardPaymentState.CardResult {
         do {
             DispatchQueue.main.async {
                 self.state.createdOrderResponse = .loading
@@ -42,34 +41,44 @@ class CardPaymentViewModel: ObservableObject {
             cardClient = CardClient(config: config)
             payPalDataCollector = PayPalDataCollector(config: config)
             let cardRequest = CardRequest(orderID: order.id, card: card, sca: sca)
-            
+
+            var approveResult: CardResult?
+            var approveError: Error?
+
+            let semaphore = DispatchSemaphore(value: 0)
             cardClient?.approveOrder(request: cardRequest) { result, error in
                 if let error {
-                    if error == CardError.threeDSecureCanceledError {
-                        completion(.failure(CardError.threeDSecureCanceledError))
-                    } else {
-                        completion(.failure(error))
-                    }
-                } else if let result {
-                    let cardResult = CardPaymentState.CardResult(
-                        id: result.orderID,
-                        status: result.status,
-                        didAttemptThreeDSecureAuthentication: result.didAttemptThreeDSecureAuthentication
-                    )
-                    completion(.success(cardResult))
-                    
+                    approveError = error
+                } else {
+                    approveResult = result
                     print("✅ Success in checkoutWith")
                 }
+                semaphore.signal()
             }
+            semaphore.wait()
+
+            if let error = approveError {
+                throw error
+            }
+            guard let approveResult = approveResult else {
+                throw NSError(domain: "ApproveOrderError", code: -1, userInfo: nil)
+            }
+
             DispatchQueue.main.async {
                 self.state.capturedOrderResponse = .loading
             }
+            
+            return CardPaymentState.CardResult(
+                id: approveResult.orderID,
+                status: approveResult.status,
+                didAttemptThreeDSecureAuthentication: approveResult.didAttemptThreeDSecureAuthentication
+            )
         } catch {
             DispatchQueue.main.async {
                 self.state.approveResultResponse = .error(message: error.localizedDescription)
             }
-            completion(.failure(error))
             print("❌ Failed in checkout with card: \(error.localizedDescription)")
+            throw error
         }
     }
 }

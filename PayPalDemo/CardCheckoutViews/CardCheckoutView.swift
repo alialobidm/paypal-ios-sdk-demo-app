@@ -81,21 +81,14 @@ struct CardCheckoutView: View {
                     expirationDate: expirationDate,
                     cvv: cvv
                 )
-                await viewModel.checkoutWith(
+                let cardResult = try await viewModel.checkoutWith(
                     card: card,
                     amount: "\(amount)",
                     intent: intent,
                     selectedMerchantIntegration: DemoSettings.merchantIntegration,
                     sca: viewModel.state.scaSelection
-                ) { result in
-                    switch result {
-                    case .success(let cardResult):
-                        onCheckoutCompleted(cardResult.id)
-                    case .failure(let error):
-                        showAlert = true
-                        print("Checkout failed with error: \(error)")
-                    }
-                }
+                )
+                onCheckoutCompleted(cardResult.id)
             } catch {
                 showAlert = true
                 print("Checkout process failed with error: \(error.localizedDescription)")
