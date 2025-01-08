@@ -42,20 +42,9 @@ class CardPaymentViewModel: ObservableObject {
             payPalDataCollector = PayPalDataCollector(config: config)
             let cardRequest = CardRequest(orderID: order.id, card: card, sca: sca)
 
-            var approveResult: CardResult?
             var approveError: Error?
 
-            let semaphore = DispatchSemaphore(value: 0)
-            cardClient?.approveOrder(request: cardRequest) { result, error in
-                if let error {
-                    approveError = error
-                } else {
-                    approveResult = result
-                    print("✅ Success in checkoutWith")
-                }
-                semaphore.signal()
-            }
-            semaphore.wait()
+            let approveResult = try await cardClient?.approveOrder(request: cardRequest)
 
             if let error = approveError {
                 throw error
