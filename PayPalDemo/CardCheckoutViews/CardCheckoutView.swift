@@ -76,32 +76,29 @@ struct CardCheckoutView: View {
         isLoading = true
         Task {
             do {
-                try await viewModel.createOrder(
-                    amount: "\(amount)",
-                    selectedMerchantIntegration: DemoSettings.merchantIntegration,
-                    intent: intent
+                let card = Card.createCard(
+                    cardNumber: cardNumber,
+                    expirationDate: expirationDate,
+                    cvv: cvv
                 )
-                if let orderID = viewModel.state.createOrderID {
-                    let card = Card.createCard(
-                        cardNumber: cardNumber,
-                        expirationDate: expirationDate,
-                        cvv: cvv
-                    )
-                    
-                    await viewModel.checkoutWith(card: card, orderID: orderID, sca: viewModel.state.scaSelection) { result in
-                        switch result {
-                        case .success(let cardResult):
-                            onCheckoutCompleted(cardResult.id)
-                        case .failure(let error):
-                            showAlert = true
-                            print("Checkout failed with error: \(error)")
-                        }
+                await viewModel.checkoutWith(
+                    card: card,
+                    amount: "\(amount)",
+                    intent: intent,
+                    selectedMerchantIntegration: DemoSettings.merchantIntegration,
+                    sca: viewModel.state.scaSelection
+                ) { result in
+                    switch result {
+                    case .success(let cardResult):
+                        onCheckoutCompleted(cardResult.id)
+                    case .failure(let error):
+                        showAlert = true
+                        print("Checkout failed with error: \(error)")
                     }
-                } else {
-                    showAlert = true
                 }
             } catch {
                 showAlert = true
+                print("Checkout process failed with error: \(error.localizedDescription)")
             }
             isLoading = false
         }
