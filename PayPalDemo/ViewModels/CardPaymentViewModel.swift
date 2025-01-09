@@ -18,9 +18,6 @@ class CardPaymentViewModel: ObservableObject {
         sca: SCA
     ) async throws -> CardPaymentState.CardResult {
         do {
-            DispatchQueue.main.async {
-                self.state.createdOrderResponse = .loading
-            }
             let order = try await DemoMerchantAPI.sharedService.createOrder(
                 orderParams: CreateOrderParams(
                     applicationContext: nil,
@@ -48,9 +45,6 @@ class CardPaymentViewModel: ObservableObject {
                 didAttemptThreeDSecureAuthentication: approveResult.didAttemptThreeDSecureAuthentication
             )
         } catch {
-            DispatchQueue.main.async {
-                self.state.approveResultResponse = .error(message: error.localizedDescription)
-            }
             print("❌ Failed in checkout with card: \(error.localizedDescription)")
             throw error
         }
