@@ -29,32 +29,17 @@ class CardPaymentViewModel: ObservableObject {
                 ),
                 selectedMerchantIntegration: selectedMerchantIntegration
             )
-            DispatchQueue.main.async {
-                self.state.createdOrderResponse = .loaded(order)
-                print("✅ fetched orderID: \(order.id) with status: \(order.status)")
-            }
+            print("✅ fetched orderID: \(order.id) with status: \(order.status)")
             
-            DispatchQueue.main.async {
-                self.state.approveResultResponse = .loading
-            }
             let config = try await configManager.getCoreConfig()
             cardClient = CardClient(config: config)
             payPalDataCollector = PayPalDataCollector(config: config)
             let cardRequest = CardRequest(orderID: order.id, card: card, sca: sca)
 
-            var approveError: Error?
-
             let approveResult = try await cardClient?.approveOrder(request: cardRequest)
 
-            if let error = approveError {
-                throw error
-            }
             guard let approveResult = approveResult else {
                 throw NSError(domain: "ApproveOrderError", code: -1, userInfo: nil)
-            }
-
-            DispatchQueue.main.async {
-                self.state.capturedOrderResponse = .loading
             }
             
             return CardPaymentState.CardResult(
