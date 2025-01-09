@@ -30,14 +30,14 @@ class CardPaymentViewModel: ObservableObject {
             
             let config = try await configManager.getCoreConfig()
             cardClient = CardClient(config: config)
+            
+            guard let cardClient = cardClient else {
+                throw NSError(domain: "CardClientError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Card client could not be initialized."])
+            }
             payPalDataCollector = PayPalDataCollector(config: config)
             let cardRequest = CardRequest(orderID: order.id, card: card, sca: sca)
 
-            let approveResult = try await cardClient?.approveOrder(request: cardRequest)
-
-            guard let approveResult = approveResult else {
-                throw NSError(domain: "ApproveOrderError", code: -1, userInfo: nil)
-            }
+            let approveResult = try await cardClient.approveOrder(request: cardRequest)
             
             return CardPaymentState.CardResult(
                 id: approveResult.orderID,
