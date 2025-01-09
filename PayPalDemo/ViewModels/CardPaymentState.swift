@@ -16,40 +16,4 @@ struct CardPaymentState: Equatable {
     var intent: Intent = .authorize
     var scaSelection: SCA = .scaWhenRequired
     var approveResult: CardResult?
-
-    var createdOrderResponse: LoadingState<Order> = .idle {
-        didSet {
-            if case .loaded(let value) = createdOrderResponse {
-                createOrder = value
-            }
-        }
-    }
-
-    var approveResultResponse: LoadingState<CardResult> = .idle {
-        didSet {
-            if case .loaded(let value) = approveResultResponse {
-                approveResult = value
-            }
-        }
-    }
-
-    var capturedOrderResponse: LoadingState<Order> = .idle {
-        didSet {
-            if case .loaded(let value) = capturedOrderResponse {
-                capturedOrder = value
-            }
-        }
-    }
-
-    var authorizedOrderResponse: LoadingState<Order> = .idle {
-        didSet {
-            if case .loaded(let value) = authorizedOrderResponse {
-                authorizedOrder = value
-            }
-        }
-    }
-    
-    var createOrderID: String? {
-        createOrder?.id
-    }
 }
