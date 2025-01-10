@@ -4,7 +4,6 @@ import CorePayments
 import FraudProtection
 
 class CardPaymentViewModel: ObservableObject {
-    @Published var state = CardPaymentState()
     private var payPalDataCollector: PayPalDataCollector?
     let configManager = CoreConfigManager(domain: "Card Payments")
 
@@ -16,7 +15,7 @@ class CardPaymentViewModel: ObservableObject {
         intent: String,
         selectedMerchantIntegration: MerchantIntegration,
         sca: SCA
-    ) async throws -> CardPaymentState.CardResult {
+    ) async throws -> CardResult {
         do {
             let order = try await DemoMerchantAPI.sharedService.createOrder(
                 orderParams: CreateOrderParams(
@@ -39,11 +38,7 @@ class CardPaymentViewModel: ObservableObject {
 
             let approveResult = try await cardClient.approveOrder(request: cardRequest)
             
-            return CardPaymentState.CardResult(
-                id: approveResult.orderID,
-                status: approveResult.status,
-                didAttemptThreeDSecureAuthentication: approveResult.didAttemptThreeDSecureAuthentication
-            )
+            return approveResult
         } catch {
             print("❌ Failed in checkout with card: \(error.localizedDescription)")
             throw error

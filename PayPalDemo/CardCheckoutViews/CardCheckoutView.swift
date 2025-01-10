@@ -86,9 +86,9 @@ struct CardCheckoutView: View {
                     amount: "\(amount)",
                     intent: intent,
                     selectedMerchantIntegration: DemoSettings.merchantIntegration,
-                    sca: viewModel.state.scaSelection
+                    sca: .scaWhenRequired
                 )
-                onCheckoutCompleted(cardResult.id)
+                onCheckoutCompleted(cardResult.orderID)
             } catch {
                 showAlert = true
                 print("Checkout process failed with error: \(error.localizedDescription)")
