@@ -66,7 +66,6 @@ struct ShippingOption: Encodable {
 struct Payee: Encodable {
 
     let merchantID: String
-    let emailAddress: String
 }
 
 struct Amount: Encodable {
