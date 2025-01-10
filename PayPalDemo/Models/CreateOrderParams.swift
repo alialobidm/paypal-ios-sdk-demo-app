@@ -72,13 +72,6 @@ struct Amount: Encodable {
 
     let currencyCode: String
     let value: String
-    var breakdown: Breakdown?
-    
-    struct Breakdown: Encodable {
-
-        let shipping: ItemTotal
-        let itemTotal: ItemTotal
-    }
 }
 
 struct ItemTotal: Encodable {
