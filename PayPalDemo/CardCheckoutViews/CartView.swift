@@ -11,14 +11,14 @@ struct CartView: View {
                 .font(.largeTitle)
                 .padding([.top, .leading])
             
-            CartItemView()
-            
+            CartItemView(amount: totalAmount)
+
             Divider()
                 .padding(.vertical)
                 .padding(.horizontal)
             
-            TotalSection()
-            
+            TotalSection(amount: totalAmount)
+
             Spacer()
             
             VStack(spacing: 10) {
@@ -48,6 +48,8 @@ struct CartView: View {
 
 
 struct CartItemView: View {
+    let amount: Double
+
     var body: some View {
         VStack(alignment: .leading, spacing: 15){
             HStack{
@@ -65,7 +67,7 @@ struct CartItemView: View {
                 
                 Spacer()
                 
-                Text("$29.99")
+                Text("$\(amount, specifier: "%.2f")")
                     .font(.headline)
             }
             .padding()
@@ -82,13 +84,15 @@ struct CartItemView: View {
 }
 
 struct TotalSection: View {
+    let amount: Double
+
     var body: some View {
         HStack {
             Text("Total")
                 .font(.title2)
             Spacer()
             
-            Text("$29.99")
+            Text("$\(amount, specifier: "%.2f")")
                 .font(.title2)
         }
         .padding(.horizontal)

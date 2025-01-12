@@ -40,13 +40,9 @@ class CardPaymentViewModel: ObservableObject {
             // returns CardResult with orderID, status and didAttemptThreeDSecureAuthentication
            _ = try await cardClient.approveOrder(request: cardRequest)
 
-            payPalDataCollector = try await PayPalDataCollector(config: config)
-            let payPalClientMetadataID = payPalDataCollector?.collectDeviceData()
-
             let completedOrder = try await DemoMerchantAPI.sharedService.captureOrder(
                 orderID: order.id,
-                selectedMerchantIntegration: selectedMerchantIntegration,
-                payPalClientMetadataID: payPalClientMetadataID
+                selectedMerchantIntegration: selectedMerchantIntegration
             )
             return completedOrder
         } catch {

@@ -8,33 +8,19 @@ struct CardCheckoutView: View {
     let onCheckoutCompleted: (String) -> Void
 
     @StateObject private var validationViewModel = CardCheckoutValidationViewModel()
-    @State private var cardNumber: String = "4111 1111 1111 1111"
-    @State private var expirationDate: String = "01 / 25"
-    @State private var cvv: String = "123"
+
     @State private var showAlert: Bool = false
     @State private var isLoading: Bool = false
-    
-    private let cardFormatter = CardFormatter()
 
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 16) {
                 SectionHeader(title: "Card Checkout")
                     .padding(.bottom, 25)
-                CardInputField(placeholder: "Card Number", text: $cardNumber)
-                    .onChange(of: cardNumber) { _, newValue in
-                        cardNumber = cardFormatter.formatFieldWith(newValue, field: .cardNumber)
-                        cvv = CardType.unknown.getCardType(newValue) == .americanExpress ? "1234" : "123"
-                    }
+                CardInputField(placeholder: "Card Number", text: $validationViewModel.cardNumber)
                 HStack(spacing: 10) {
-                    CardInputField(placeholder: "MM/YY", text: $expirationDate)
-                        .onChange(of: expirationDate) { _, newValue in
-                            expirationDate = cardFormatter.formatFieldWith(newValue, field: .expirationDate)
-                        }
-                    CardInputField(placeholder: "CVV", text: $cvv)
-                        .onChange(of: cvv) { _, newValue in
-                            cvv = cardFormatter.formatFieldWith(newValue, field: .cvv)
-                        }
+                    CardInputField(placeholder: "MM/YY", text: $validationViewModel.expirationDate)
+                    CardInputField(placeholder: "CVV", text: $validationViewModel.cvv)
                 }
                 .padding(.trailing, 20)
                 Spacer()
@@ -64,22 +50,20 @@ struct CardCheckoutView: View {
     }
 
     private func handleSubmit() {
-        validationViewModel.cardNumber = cardNumber
-        validationViewModel.expirationDate = expirationDate
-        validationViewModel.cvv = cvv
-        
+
         guard validationViewModel.isValid else {
             showAlert = true
-            
             return
         }
+
         isLoading = true
+
         Task {
             do {
                 let card = Card.createCard(
-                    cardNumber: cardNumber,
-                    expirationDate: expirationDate,
-                    cvv: cvv
+                    cardNumber: validationViewModel.cardNumber,
+                    expirationDate: validationViewModel.expirationDate,
+                    cvv: validationViewModel.cvv
                 )
                 let completedOrder = try await viewModel.checkoutWith(
                     card: card,
