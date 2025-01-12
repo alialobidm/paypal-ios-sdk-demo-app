@@ -27,23 +27,22 @@ class CardPaymentViewModel: ObservableObject {
                 ),
                 selectedMerchantIntegration: selectedMerchantIntegration
             )
-            print("✅ fetched orderID: \(order.id) with status: \(order.status)")
+            print("✅ Order created with orderID: \(order.id) with status: \(order.status)")
 
             cardClient = try await CardClient(config: config)
-
             guard let cardClient = cardClient else {
                 throw NSError(domain: "CardClientError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Card client could not be initialized."])
             }
 
             let cardRequest = CardRequest(orderID: order.id, card: card, sca: sca)
-
-            // returns CardResult with orderID, status and didAttemptThreeDSecureAuthentication
-           _ = try await cardClient.approveOrder(request: cardRequest)
+            let cardResult = try await cardClient.approveOrder(request: cardRequest)
+            print("✅ Card approval returned with CardResult \norderID: \(cardResult.orderID) \nstatus: \(String(describing: cardResult.status)) \ndidAttemptThreeDSecureAuthentication: \(cardResult.didAttemptThreeDSecureAuthentication)")
 
             let completedOrder = try await DemoMerchantAPI.sharedService.captureOrder(
                 orderID: order.id,
                 selectedMerchantIntegration: selectedMerchantIntegration
             )
+            print("✅ Capture returned with orderID: \(completedOrder.id) with status: \(completedOrder.status) ")
             return completedOrder
         } catch {
             print("❌ Failed in checkout with card: \(error.localizedDescription)")
