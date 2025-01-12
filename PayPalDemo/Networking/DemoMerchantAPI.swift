@@ -6,50 +6,7 @@ final class DemoMerchantAPI {
 
     static let sharedService = DemoMerchantAPI()
 
-    // To hardcode an order ID and client ID for this demo app, set the below values
-    enum InjectedValues {
-        static let orderID: String? = nil
-        static let clientID: String? = nil
-    }
-
     private init() {}
-
-    func createSetupToken(
-        customerID: String? = nil,
-        selectedMerchantIntegration: MerchantIntegration,
-        paymentSourceType: PaymentSourceType
-    ) async throws -> CreateSetupTokenResponse {
-        do {
-            let requestBody = CreateSetupTokenParam(paymentSource: paymentSourceType)
-
-            guard let url = buildBaseURL(with: "/setup_tokens") else {
-                throw URLResponseError.invalidURL
-            }
-            // make it mutable to add header fields for partner scenarios
-            let request = buildURLRequest(method: "POST", url: url, body: requestBody)
-            let data = try await data(for: request)
-            return try parse(from: data)
-        } catch {
-            throw error
-        }
-    }
-
-    func createPaymentToken(setupToken: String, selectedMerchantIntegration: MerchantIntegration) async throws -> PaymentTokenResponse {
-        do {
-            let requestBody = PaymentTokenParam(paymentSource: PaymentTokenParam.PaymentSource(setupTokenID: setupToken))
-            guard let url = buildBaseURL(with: "/payment_tokens") else {
-                throw URLResponseError.invalidURL
-            }
-            // make it mutable to add header value for partner scenarios
-            let request = buildURLRequest(method: "POST", url: url, body: requestBody)
-
-            let data = try await data(for: request)
-            return try parse(from: data)
-        } catch {
-            print("error with the create payment token request: \(error.localizedDescription)")
-            throw error
-        }
-    }
 
     func completeOrder(intent: Intent, orderID: String, payPalClientMetadataID: String? = nil) async throws -> Order {
         let intent = intent == .authorize ? "authorize" : "capture"
@@ -104,9 +61,7 @@ final class DemoMerchantAPI {
     /// - Returns: an order
     /// - Throws: an error explaining why create order failed
     func createOrder(orderParams: CreateOrderParams, selectedMerchantIntegration: MerchantIntegration) async throws -> Order {
-        if let injectedOrderID = InjectedValues.orderID {
-            return Order(id: injectedOrderID, status: "CREATED")
-        }
+
         guard let url = buildBaseURL(with: "/orders") else {
             throw URLResponseError.invalidURL
         }
@@ -122,9 +77,6 @@ final class DemoMerchantAPI {
     /// - Returns: a String representing an clientID
     /// - Throws: an error explaining why fetch clientID failed
     public func getClientID(environment: paypal_ios_sdk_demo_app.Environment, selectedMerchantIntegration: MerchantIntegration) async -> String? {
-        if let injectedClientID = InjectedValues.clientID {
-            return injectedClientID
-        }
         
         let clientID = await fetchClientID(environment: environment, selectedMerchantIntegration: selectedMerchantIntegration)
             return clientID

@@ -23,14 +23,10 @@
 		1058F8162D1F127000D5A7C1 /* DemoSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8152D1F127000D5A7C1 /* DemoSettings.swift */; };
 		1058F8182D1F12C900D5A7C1 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8172D1F12C900D5A7C1 /* Environment.swift */; };
 		1058F81C2D1F152800D5A7C1 /* DemoMerchantAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F81B2D1F152800D5A7C1 /* DemoMerchantAPI.swift */; };
-		1058F81F2D1F158B00D5A7C1 /* CreateSetupTokenParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F81E2D1F158B00D5A7C1 /* CreateSetupTokenParam.swift */; };
-		1058F8212D1F15C100D5A7C1 /* CreateSetupTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8202D1F15C100D5A7C1 /* CreateSetupTokenResponse.swift */; };
 		1058F8232D1F161300D5A7C1 /* URLResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8222D1F161300D5A7C1 /* URLResponseError.swift */; };
 		1058F8252D1F1EDC00D5A7C1 /* CardPaymentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8242D1F1EDC00D5A7C1 /* CardPaymentState.swift */; };
 		1058F8272D1F1F1500D5A7C1 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8262D1F1F1500D5A7C1 /* Order.swift */; };
 		1058F8292D1F1F6500D5A7C1 /* Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8282D1F1F6500D5A7C1 /* Intent.swift */; };
-		1058F82B2D1F1FE200D5A7C1 /* PaymentTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F82A2D1F1FE200D5A7C1 /* PaymentTokenResponse.swift */; };
-		1058F82D2D1F202E00D5A7C1 /* PaymentTokenParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F82C2D1F202E00D5A7C1 /* PaymentTokenParam.swift */; };
 		1058F82F2D1F205100D5A7C1 /* EmptyBodyParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F82E2D1F205100D5A7C1 /* EmptyBodyParams.swift */; };
 		1058F8312D1F207600D5A7C1 /* CreateOrderParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8302D1F207600D5A7C1 /* CreateOrderParams.swift */; };
 		1058F8332D1F20E700D5A7C1 /* ClientIDRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8322D1F20E700D5A7C1 /* ClientIDRequest.swift */; };
@@ -78,14 +74,10 @@
 		1058F8152D1F127000D5A7C1 /* DemoSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSettings.swift; sourceTree = "<group>"; };
 		1058F8172D1F12C900D5A7C1 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		1058F81B2D1F152800D5A7C1 /* DemoMerchantAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoMerchantAPI.swift; sourceTree = "<group>"; };
-		1058F81E2D1F158B00D5A7C1 /* CreateSetupTokenParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSetupTokenParam.swift; sourceTree = "<group>"; };
-		1058F8202D1F15C100D5A7C1 /* CreateSetupTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSetupTokenResponse.swift; sourceTree = "<group>"; };
 		1058F8222D1F161300D5A7C1 /* URLResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLResponseError.swift; sourceTree = "<group>"; };
 		1058F8242D1F1EDC00D5A7C1 /* CardPaymentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPaymentState.swift; sourceTree = "<group>"; };
 		1058F8262D1F1F1500D5A7C1 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		1058F8282D1F1F6500D5A7C1 /* Intent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intent.swift; sourceTree = "<group>"; };
-		1058F82A2D1F1FE200D5A7C1 /* PaymentTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTokenResponse.swift; sourceTree = "<group>"; };
-		1058F82C2D1F202E00D5A7C1 /* PaymentTokenParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTokenParam.swift; sourceTree = "<group>"; };
 		1058F82E2D1F205100D5A7C1 /* EmptyBodyParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBodyParams.swift; sourceTree = "<group>"; };
 		1058F8302D1F207600D5A7C1 /* CreateOrderParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrderParams.swift; sourceTree = "<group>"; };
 		1058F8322D1F20E700D5A7C1 /* ClientIDRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientIDRequest.swift; sourceTree = "<group>"; };
@@ -222,11 +214,7 @@
 		1058F81D2D1F156600D5A7C1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1058F81E2D1F158B00D5A7C1 /* CreateSetupTokenParam.swift */,
-				1058F8202D1F15C100D5A7C1 /* CreateSetupTokenResponse.swift */,
 				1058F8262D1F1F1500D5A7C1 /* Order.swift */,
-				1058F82A2D1F1FE200D5A7C1 /* PaymentTokenResponse.swift */,
-				1058F82C2D1F202E00D5A7C1 /* PaymentTokenParam.swift */,
 				1058F82E2D1F205100D5A7C1 /* EmptyBodyParams.swift */,
 				1058F8302D1F207600D5A7C1 /* CreateOrderParams.swift */,
 				1058F8322D1F20E700D5A7C1 /* ClientIDRequest.swift */,
@@ -398,17 +386,13 @@
 				1001E2DD2D0B99030023A03C /* CheckoutFlow.swift in Sources */,
 				1058F82F2D1F205100D5A7C1 /* EmptyBodyParams.swift in Sources */,
 				1058F84A2D28602E00D5A7C1 /* PayPalViewModel.swift in Sources */,
-				1058F82B2D1F1FE200D5A7C1 /* PaymentTokenResponse.swift in Sources */,
 				1058F8182D1F12C900D5A7C1 /* Environment.swift in Sources */,
 				1001E2DD2D0B99030023A03C /* CheckoutFlow.swift in Sources */,
-				1058F82D2D1F202E00D5A7C1 /* PaymentTokenParam.swift in Sources */,
 				1058F8252D1F1EDC00D5A7C1 /* CardPaymentState.swift in Sources */,
 				10A602AA2D160FAB0008712F /* CardCheckoutVlidationViewModel.swift in Sources */,
-				1058F8212D1F15C100D5A7C1 /* CreateSetupTokenResponse.swift in Sources */,
 				1D694AFE2D0C9EE1005ED7C0 /* CartView.swift in Sources */,
 				1058F8162D1F127000D5A7C1 /* DemoSettings.swift in Sources */,
 				1058F8332D1F20E700D5A7C1 /* ClientIDRequest.swift in Sources */,
-				1058F81F2D1F158B00D5A7C1 /* CreateSetupTokenParam.swift in Sources */,
 				1001E2DB2D0B99030023A03C /* PayPalDemoApp.swift in Sources */,
 				1058F84C2D2860A800D5A7C1 /* CheckoutCoordinator.swift in Sources */,
 				1058F8312D1F207600D5A7C1 /* CreateOrderParams.swift in Sources */,
