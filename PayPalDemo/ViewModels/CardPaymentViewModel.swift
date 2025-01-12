@@ -15,8 +15,10 @@ class CardPaymentViewModel: ObservableObject {
         intent: String,
         selectedMerchantIntegration: MerchantIntegration,
         sca: SCA
-    ) async throws -> CardResult {
+    ) async throws -> Order {
         do {
+            async let config = try await configManager.getCoreConfig()
+
             let order = try await DemoMerchantAPI.sharedService.createOrder(
                 orderParams: CreateOrderParams(
                     applicationContext: nil,
@@ -26,19 +28,27 @@ class CardPaymentViewModel: ObservableObject {
                 selectedMerchantIntegration: selectedMerchantIntegration
             )
             print("✅ fetched orderID: \(order.id) with status: \(order.status)")
-            
-            let config = try await configManager.getCoreConfig()
-            cardClient = CardClient(config: config)
-            
+
+            cardClient = try await CardClient(config: config)
+
             guard let cardClient = cardClient else {
                 throw NSError(domain: "CardClientError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Card client could not be initialized."])
             }
-            payPalDataCollector = PayPalDataCollector(config: config)
+
             let cardRequest = CardRequest(orderID: order.id, card: card, sca: sca)
 
-            let approveResult = try await cardClient.approveOrder(request: cardRequest)
-            
-            return approveResult
+            // returns CardResult with orderID, status and didAttemptThreeDSecureAuthentication
+           _ = try await cardClient.approveOrder(request: cardRequest)
+
+            payPalDataCollector = try await PayPalDataCollector(config: config)
+            let payPalClientMetadataID = payPalDataCollector?.collectDeviceData()
+
+            let completedOrder = try await DemoMerchantAPI.sharedService.captureOrder(
+                orderID: order.id,
+                selectedMerchantIntegration: selectedMerchantIntegration,
+                payPalClientMetadataID: payPalClientMetadataID
+            )
+            return completedOrder
         } catch {
             print("❌ Failed in checkout with card: \(error.localizedDescription)")
             throw error

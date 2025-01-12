@@ -24,7 +24,6 @@
 		1058F8182D1F12C900D5A7C1 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8172D1F12C900D5A7C1 /* Environment.swift */; };
 		1058F81C2D1F152800D5A7C1 /* DemoMerchantAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F81B2D1F152800D5A7C1 /* DemoMerchantAPI.swift */; };
 		1058F8232D1F161300D5A7C1 /* URLResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8222D1F161300D5A7C1 /* URLResponseError.swift */; };
-		1058F8252D1F1EDC00D5A7C1 /* CardPaymentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8242D1F1EDC00D5A7C1 /* CardPaymentState.swift */; };
 		1058F8272D1F1F1500D5A7C1 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8262D1F1F1500D5A7C1 /* Order.swift */; };
 		1058F8292D1F1F6500D5A7C1 /* Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8282D1F1F6500D5A7C1 /* Intent.swift */; };
 		1058F82F2D1F205100D5A7C1 /* EmptyBodyParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F82E2D1F205100D5A7C1 /* EmptyBodyParams.swift */; };
@@ -75,7 +74,6 @@
 		1058F8172D1F12C900D5A7C1 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		1058F81B2D1F152800D5A7C1 /* DemoMerchantAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoMerchantAPI.swift; sourceTree = "<group>"; };
 		1058F8222D1F161300D5A7C1 /* URLResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLResponseError.swift; sourceTree = "<group>"; };
-		1058F8242D1F1EDC00D5A7C1 /* CardPaymentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPaymentState.swift; sourceTree = "<group>"; };
 		1058F8262D1F1F1500D5A7C1 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		1058F8282D1F1F6500D5A7C1 /* Intent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intent.swift; sourceTree = "<group>"; };
 		1058F82E2D1F205100D5A7C1 /* EmptyBodyParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBodyParams.swift; sourceTree = "<group>"; };
@@ -235,7 +233,6 @@
 			children = (
 				10A602A92D160FAB0008712F /* CardCheckoutVlidationViewModel.swift */,
 				1058F8112D1F11A800D5A7C1 /* CardPaymentViewModel.swift */,
-				1058F8242D1F1EDC00D5A7C1 /* CardPaymentState.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -388,7 +385,6 @@
 				1058F84A2D28602E00D5A7C1 /* PayPalViewModel.swift in Sources */,
 				1058F8182D1F12C900D5A7C1 /* Environment.swift in Sources */,
 				1001E2DD2D0B99030023A03C /* CheckoutFlow.swift in Sources */,
-				1058F8252D1F1EDC00D5A7C1 /* CardPaymentState.swift in Sources */,
 				10A602AA2D160FAB0008712F /* CardCheckoutVlidationViewModel.swift in Sources */,
 				1D694AFE2D0C9EE1005ED7C0 /* CartView.swift in Sources */,
 				1058F8162D1F127000D5A7C1 /* DemoSettings.swift in Sources */,

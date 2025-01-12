@@ -8,20 +8,6 @@ final class DemoMerchantAPI {
 
     private init() {}
 
-    func completeOrder(intent: Intent, orderID: String, payPalClientMetadataID: String? = nil) async throws -> Order {
-        let intent = intent == .authorize ? "authorize" : "capture"
-        guard let url = buildBaseURL(with: "/orders/\(orderID)/\(intent)") else {
-            throw URLResponseError.invalidURL
-        }
-
-        var urlRequest = buildURLRequest(method: "POST", url: url, body: EmptyBodyParams())
-        if let payPalClientMetadataID {
-            urlRequest.addValue(payPalClientMetadataID, forHTTPHeaderField: "PayPal-Client-Metadata-Id")
-        }
-        let data = try await data(for: urlRequest)
-        return try parse(from: data)
-    }
-
     func captureOrder(
         orderID: String,
         selectedMerchantIntegration: MerchantIntegration,
