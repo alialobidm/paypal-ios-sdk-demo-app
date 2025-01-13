@@ -69,7 +69,6 @@ struct CardCheckoutView: View {
                     card: card,
                     amount: "\(amount)",
                     intent: intent,
-                    selectedMerchantIntegration: DemoSettings.merchantIntegration,
                     sca: .scaWhenRequired
                 )
                 onCheckoutCompleted(completedOrder.id)

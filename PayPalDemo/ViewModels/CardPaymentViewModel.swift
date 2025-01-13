@@ -4,7 +4,7 @@ import CorePayments
 import FraudProtection
 
 class CardPaymentViewModel: ObservableObject {
-    private var payPalDataCollector: PayPalDataCollector?
+    
     let configManager = CoreConfigManager(domain: "Card Payments")
 
     private var cardClient: CardClient?
@@ -13,7 +13,6 @@ class CardPaymentViewModel: ObservableObject {
         card: Card,
         amount: String,
         intent: String,
-        selectedMerchantIntegration: MerchantIntegration,
         sca: SCA
     ) async throws -> Order {
         do {
@@ -24,8 +23,7 @@ class CardPaymentViewModel: ObservableObject {
                     applicationContext: nil,
                     intent: intent,
                     purchaseUnits: [PurchaseUnit(amount: Amount(currencyCode: "USD", value: amount))]
-                ),
-                selectedMerchantIntegration: selectedMerchantIntegration
+                )
             )
             print("✅ Order created with orderID: \(order.id) with status: \(order.status)")
 
@@ -38,10 +36,7 @@ class CardPaymentViewModel: ObservableObject {
             let cardResult = try await cardClient.approveOrder(request: cardRequest)
             print("✅ Card approval returned with CardResult \norderID: \(cardResult.orderID) \nstatus: \(String(describing: cardResult.status)) \ndidAttemptThreeDSecureAuthentication: \(cardResult.didAttemptThreeDSecureAuthentication)")
 
-            let completedOrder = try await DemoMerchantAPI.sharedService.captureOrder(
-                orderID: order.id,
-                selectedMerchantIntegration: selectedMerchantIntegration
-            )
+            let completedOrder = try await DemoMerchantAPI.sharedService.captureOrder(orderID: order.id)
             print("✅ Capture returned with orderID: \(completedOrder.id) with status: \(completedOrder.status) ")
             return completedOrder
         } catch {

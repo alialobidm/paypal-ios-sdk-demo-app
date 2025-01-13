@@ -8,9 +8,34 @@ final class DemoMerchantAPI {
 
     private init() {}
 
+    /// This function fetches a clientID to initialize any module of the SDK
+    /// - Parameters:
+    ///   - environment: the current environment
+    /// - Returns: a String representing an clientID
+    /// - Throws: an error explaining why fetch clientID failed
+    public func getClientID(environment: paypal_ios_sdk_demo_app.Environment) async -> String? {
+
+        let clientID = await fetchClientID(environment: environment)
+            return clientID
+    }
+
+    /// This function replicates a way a merchant may go about creating an order on their server and is not part of the SDK flow.
+    /// - Parameter orderParams: the parameters to create the order with
+    /// - Returns: an order
+    /// - Throws: an error explaining why create order failed
+    func createOrder(orderParams: CreateOrderParams) async throws -> Order {
+
+        guard let url = buildBaseURL(with: "/orders") else {
+            throw URLResponseError.invalidURL
+        }
+
+        let urlRequest = buildURLRequest(method: "POST", url: url, body: orderParams)
+        let data = try await data(for: urlRequest)
+        return try parse(from: data)
+    }
+
     func captureOrder(
         orderID: String,
-        selectedMerchantIntegration: MerchantIntegration,
         payPalClientMetadataID: String? = nil
     ) async throws -> Order {
         guard let url = buildBaseURL(with: "/orders/\(orderID)/capture") else {
@@ -27,7 +52,6 @@ final class DemoMerchantAPI {
     
     func authorizeOrder(
         orderID: String,
-        selectedMerchantIntegration: MerchantIntegration,
         payPalClientMetadataID: String? = nil
     ) async throws -> Order {
         guard let url = buildBaseURL(with: "/orders/\(orderID)/authorize") else {
@@ -41,38 +65,11 @@ final class DemoMerchantAPI {
         let data = try await data(for: urlRequest)
         return try parse(from: data)
     }
-    
-    /// This function replicates a way a merchant may go about creating an order on their server and is not part of the SDK flow.
-    /// - Parameter orderParams: the parameters to create the order with
-    /// - Returns: an order
-    /// - Throws: an error explaining why create order failed
-    func createOrder(orderParams: CreateOrderParams, selectedMerchantIntegration: MerchantIntegration) async throws -> Order {
-
-        guard let url = buildBaseURL(with: "/orders") else {
-            throw URLResponseError.invalidURL
-        }
-
-        let urlRequest = buildURLRequest(method: "POST", url: url, body: orderParams)
-        let data = try await data(for: urlRequest)
-        return try parse(from: data)
-    }
-
-    /// This function fetches a clientID to initialize any module of the SDK
-    /// - Parameters:
-    ///   - environment: the current environment
-    /// - Returns: a String representing an clientID
-    /// - Throws: an error explaining why fetch clientID failed
-    public func getClientID(environment: paypal_ios_sdk_demo_app.Environment, selectedMerchantIntegration: MerchantIntegration) async -> String? {
-        
-        let clientID = await fetchClientID(environment: environment, selectedMerchantIntegration: selectedMerchantIntegration)
-            return clientID
-    }
 
     // MARK: Private methods
 
     private func buildURLRequest<T>(method: String, url: URL, body: T) -> URLRequest where T: Encodable {
         let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -105,18 +102,18 @@ final class DemoMerchantAPI {
     }
 
     private func buildBaseURL(with endpoint: String) -> URL? {
-        return URL(string: DemoSettings.environment.baseURL + DemoSettings.merchantIntegration.path + endpoint)
+        return URL(string: DemoSettings.environment.baseURL + endpoint)
     }
 
     private func buildPayPalURL(with endpoint: String) -> URL? {
         URL(string: "https://api.sandbox.paypal.com" + endpoint)
     }
 
-    private func fetchClientID(environment: paypal_ios_sdk_demo_app.Environment, selectedMerchantIntegration: MerchantIntegration) async -> String? {
+    private func fetchClientID(environment: paypal_ios_sdk_demo_app.Environment) async -> String? {
         do {
             let clientIDRequest = ClientIDRequest()
             let request = try createUrlRequest(
-                clientIDRequest: clientIDRequest, environment: environment, selectedMerchantIntegration: selectedMerchantIntegration
+                clientIDRequest: clientIDRequest, environment: environment
             )
             let (data, response) = try await URLSession.shared.performRequest(with: request)
             guard let response = response as? HTTPURLResponse else {
@@ -136,12 +133,9 @@ final class DemoMerchantAPI {
     
     private func createUrlRequest(
         clientIDRequest: ClientIDRequest,
-        environment: paypal_ios_sdk_demo_app.Environment,
-        selectedMerchantIntegration: MerchantIntegration
+        environment: paypal_ios_sdk_demo_app.Environment
     ) throws -> URLRequest {
         var completeUrl = environment.baseURL
-       
-        completeUrl += selectedMerchantIntegration.path
         completeUrl.append(contentsOf: clientIDRequest.path)
         guard let url = URL(string: completeUrl) else {
             throw URLResponseError.invalidURL

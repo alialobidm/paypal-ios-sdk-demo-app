@@ -10,10 +10,7 @@ class CoreConfigManager {
     }
 
     func getClientID() async -> String? {
-        await DemoMerchantAPI.sharedService.getClientID(
-            environment: DemoSettings.environment,
-            selectedMerchantIntegration: DemoSettings.merchantIntegration
-        )
+        await DemoMerchantAPI.sharedService.getClientID(environment: DemoSettings.environment)
     }
 
     func getCoreConfig() async throws -> CoreConfig {
