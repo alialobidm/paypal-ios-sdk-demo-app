@@ -4,7 +4,7 @@ import CardPayments
 struct CardCheckoutView: View {
     @ObservedObject var viewModel: CardPaymentViewModel
     let amount: Double
-    let intent: String
+    let intent: Intent
     let onCheckoutCompleted: (String) -> Void
 
     @StateObject private var validationViewModel = CardCheckoutValidationViewModel()

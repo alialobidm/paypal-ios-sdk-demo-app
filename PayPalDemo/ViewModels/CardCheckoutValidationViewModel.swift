@@ -17,6 +17,16 @@ class CardCheckoutValidationViewModel: ObservableObject {
         return Card.isCardFormValid(cardNumber: cardNumber, expirationDate: expirationDate, cvv: cvv)
     }
 
+    func isCardValid(completion: (Card?) -> Void) {
+        if isValid {
+            let card = Card.createCard(cardNumber: cardNumber, expirationDate: expirationDate, cvv: cvv)
+            completion(card)
+        } else {
+            errorMessage = "Invalid card details. Please check and try again."
+            completion(nil)
+        }
+    }
+
     func updateCardNumber(_ newValue: String) {
         cardNumber = cardFormatter.formatFieldWith(cardNumber, field: .cardNumber)
         cvv = CardType.unknown.getCardType(cardNumber) == .americanExpress ? "1234" : "123"
@@ -28,16 +38,6 @@ class CardCheckoutValidationViewModel: ObservableObject {
 
     func updateCVV(_ newValue: String) {
         cvv = cardFormatter.formatFieldWith(cvv, field: .cvv)
-    }
-
-    func isCardValid(completion: (Card?) -> Void) {
-        if isValid {
-            let card = Card.createCard(cardNumber: cardNumber, expirationDate: expirationDate, cvv: cvv)
-            completion(card)
-        } else {
-            errorMessage = "Invalid card details. Please check and try again."
-            completion(nil)
-        }
     }
 }
 

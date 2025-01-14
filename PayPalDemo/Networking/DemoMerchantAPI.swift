@@ -34,30 +34,15 @@ final class DemoMerchantAPI {
         return try parse(from: data)
     }
 
-    func captureOrder(
+    func completeOrder(
         orderID: String,
-        payPalClientMetadataID: String? = nil
+        payPalClientMetadataID: String? = nil,
+        intent: Intent
     ) async throws -> Order {
-        guard let url = buildBaseURL(with: "/orders/\(orderID)/capture") else {
+        guard let url = buildBaseURL(with: "/orders/\(orderID)/\(intent.rawValue)") else {
             throw URLResponseError.invalidURL
         }
-        
-        var urlRequest = buildURLRequest(method: "POST", url: url, body: EmptyBodyParams())
-        if let payPalClientMetadataID {
-            urlRequest.addValue(payPalClientMetadataID, forHTTPHeaderField: "PayPal-Client-Metadata-Id")
-        }
-        let data = try await data(for: urlRequest)
-        return try parse(from: data)
-    }
-    
-    func authorizeOrder(
-        orderID: String,
-        payPalClientMetadataID: String? = nil
-    ) async throws -> Order {
-        guard let url = buildBaseURL(with: "/orders/\(orderID)/authorize") else {
-            throw URLResponseError.invalidURL
-        }
-        
+
         var urlRequest = buildURLRequest(method: "POST", url: url, body: EmptyBodyParams())
         if let payPalClientMetadataID {
             urlRequest.addValue(payPalClientMetadataID, forHTTPHeaderField: "PayPal-Client-Metadata-Id")
@@ -112,7 +97,7 @@ final class DemoMerchantAPI {
     private func fetchClientID(environment: paypal_ios_sdk_demo_app.Environment) async -> String? {
         do {
             let clientIDRequest = ClientIDRequest()
-            let request = try createUrlRequest(
+            let request = try buildClientIDRequest(
                 clientIDRequest: clientIDRequest, environment: environment
             )
             let (data, response) = try await URLSession.shared.performRequest(with: request)
@@ -131,7 +116,7 @@ final class DemoMerchantAPI {
         }
     }
     
-    private func createUrlRequest(
+    private func buildClientIDRequest(
         clientIDRequest: ClientIDRequest,
         environment: paypal_ios_sdk_demo_app.Environment
     ) throws -> URLRequest {

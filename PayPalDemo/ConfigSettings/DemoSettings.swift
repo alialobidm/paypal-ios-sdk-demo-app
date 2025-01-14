@@ -3,7 +3,6 @@ import Foundation
 enum DemoSettings {
 
     private static let EnvironmentDefaultsKey = "environment"
-    private static let ClientIDKey = "clientID"
 
     static var environment: Environment {
         get {

@@ -12,7 +12,7 @@ class CardPaymentViewModel: ObservableObject {
     func checkoutWith(
         card: Card,
         amount: String,
-        intent: String,
+        intent: Intent,
         sca: SCA
     ) async throws -> Order {
         do {
@@ -21,7 +21,7 @@ class CardPaymentViewModel: ObservableObject {
             let order = try await DemoMerchantAPI.sharedService.createOrder(
                 orderParams: CreateOrderParams(
                     applicationContext: nil,
-                    intent: intent,
+                    intent: intent.rawValue,
                     purchaseUnits: [PurchaseUnit(amount: Amount(currencyCode: "USD", value: amount))]
                 )
             )
@@ -36,7 +36,7 @@ class CardPaymentViewModel: ObservableObject {
             let cardResult = try await cardClient.approveOrder(request: cardRequest)
             print("✅ Card approval returned with CardResult \norderID: \(cardResult.orderID) \nstatus: \(String(describing: cardResult.status)) \ndidAttemptThreeDSecureAuthentication: \(cardResult.didAttemptThreeDSecureAuthentication)")
 
-            let completedOrder = try await DemoMerchantAPI.sharedService.captureOrder(orderID: order.id)
+            let completedOrder = try await DemoMerchantAPI.sharedService.completeOrder(orderID: order.id, intent: intent)
             print("✅ Capture returned with orderID: \(completedOrder.id) with status: \(completedOrder.status) ")
             return completedOrder
         } catch {
