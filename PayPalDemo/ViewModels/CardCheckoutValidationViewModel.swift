@@ -3,30 +3,10 @@ import CardPayments
 
 class CardCheckoutValidationViewModel: ObservableObject {
     @Published var errorMessage: String = ""
-    @Published var cardNumber: String = "4111 1111 1111 1111" {
-        didSet {
-            if oldValue != cardNumber {
-                cardNumber = cardFormatter.formatFieldWith(cardNumber, field: .cardNumber)
-                cvv = CardType.unknown.getCardType(cardNumber) == .americanExpress ? "1234" : "123"
-            }
-        }
-    }
-
-    @Published var expirationDate: String = "01 / 25" {
-        didSet {
-            if oldValue != expirationDate {
-                expirationDate = cardFormatter.formatFieldWith(expirationDate, field: .expirationDate)
-            }
-        }
-    }
-
-    @Published var cvv: String = "123" {
-        didSet {
-            if oldValue != cvv {
-                cvv = cardFormatter.formatFieldWith(cvv, field: .cvv)
-            }
-        }
-    }
+    
+    @Published var cardNumber: String = "4111 1111 1111 1111"
+    @Published var expirationDate: String = "01 / 25"
+    @Published var cvv: String = "123"
 
     private let cardFormatter = CardFormatter()
 
@@ -36,7 +16,20 @@ class CardCheckoutValidationViewModel: ObservableObject {
         print("cvv: \(cvv)")
         return Card.isCardFormValid(cardNumber: cardNumber, expirationDate: expirationDate, cvv: cvv)
     }
-    
+
+    func updateCardNumber(_ newValue: String) {
+        cardNumber = cardFormatter.formatFieldWith(cardNumber, field: .cardNumber)
+        cvv = CardType.unknown.getCardType(cardNumber) == .americanExpress ? "1234" : "123"
+    }
+
+    func updateExpirationDate(_ newValue: String) {
+        expirationDate = cardFormatter.formatFieldWith(newValue, field: .expirationDate)
+    }
+
+    func updateCVV(_ newValue: String) {
+        cvv = cardFormatter.formatFieldWith(cvv, field: .cvv)
+    }
+
     func isCardValid(completion: (Card?) -> Void) {
         if isValid {
             let card = Card.createCard(cardNumber: cardNumber, expirationDate: expirationDate, cvv: cvv)

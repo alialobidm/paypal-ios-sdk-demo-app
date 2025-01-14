@@ -18,9 +18,18 @@ struct CardCheckoutView: View {
                 SectionHeader(title: "Card Checkout")
                     .padding(.bottom, 25)
                 CardInputField(placeholder: "Card Number", text: $validationViewModel.cardNumber)
+                    .onChange(of: validationViewModel.cardNumber) {_, newValue in
+                        validationViewModel.updateCardNumber(newValue)
+                    }
                 HStack(spacing: 10) {
                     CardInputField(placeholder: "MM/YY", text: $validationViewModel.expirationDate)
+                        .onChange(of: validationViewModel.expirationDate) {_, newValue in
+                            validationViewModel.updateExpirationDate(newValue)
+                        }
                     CardInputField(placeholder: "CVV", text: $validationViewModel.cvv)
+                        .onChange(of: validationViewModel.cardNumber) {_, newValue in
+                            validationViewModel.updateCardNumber(newValue)
+                        }
                 }
                 .padding(.trailing, 20)
                 Spacer()
