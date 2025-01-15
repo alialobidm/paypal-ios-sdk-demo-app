@@ -13,9 +13,9 @@ final class DemoMerchantAPI {
     ///   - environment: the current environment
     /// - Returns: a String representing an clientID
     /// - Throws: an error explaining why fetch clientID failed
-    public func getClientID(environment: paypal_ios_sdk_demo_app.Environment) async -> String? {
+    public func getClientID(environment: paypal_ios_sdk_demo_app.Environment) async throws -> String {
 
-        let clientID = await fetchClientID(environment: environment)
+        let clientID = try await fetchClientID(environment: environment)
             return clientID
     }
 
@@ -24,9 +24,8 @@ final class DemoMerchantAPI {
     /// - Returns: an order
     /// - Throws: an error explaining why create order failed
     func createOrder(orderParams: CreateOrderParams) async throws -> Order {
-
         guard let url = buildBaseURL(with: "/orders") else {
-            throw URLResponseError.invalidURL
+            throw APIError.invalidURL
         }
 
         let urlRequest = buildURLRequest(method: "POST", url: url, body: orderParams)
@@ -40,7 +39,7 @@ final class DemoMerchantAPI {
         intent: Intent
     ) async throws -> Order {
         guard let url = buildBaseURL(with: "/orders/\(orderID)/\(intent.rawValue)") else {
-            throw URLResponseError.invalidURL
+            throw APIError.invalidURL
         }
 
         var urlRequest = buildURLRequest(method: "POST", url: url, body: EmptyBodyParams())
@@ -69,10 +68,26 @@ final class DemoMerchantAPI {
 
     private func data(for urlRequest: URLRequest) async throws -> Data {
         do {
-            let (data, _) = try await URLSession.shared.data(for: urlRequest)
-            return data
+            let (data, response) = try await URLSession.shared.data(for: urlRequest)
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw APIError.httpResponseError
+            }
+
+            switch httpResponse.statusCode {
+            case 200..<300:
+                return data
+            case 401:
+                throw APIError.unauthorized
+            default:
+                throw APIError.serverError(statusCode: httpResponse.statusCode)
+            }
+        } catch let error as URLError {
+            throw APIError.networkError(error)
+        } catch let error as APIError {
+            throw error
         } catch {
-            throw URLResponseError.networkConnectionError
+            throw APIError.unknown
         }
     }
 
@@ -82,7 +97,7 @@ final class DemoMerchantAPI {
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             return try decoder.decode(T.self, from: data)
         } catch {
-            throw URLResponseError.dataParsingError
+            throw APIError.dataParsingError
         }
     }
 
@@ -94,26 +109,21 @@ final class DemoMerchantAPI {
         URL(string: "https://api.sandbox.paypal.com" + endpoint)
     }
 
-    private func fetchClientID(environment: paypal_ios_sdk_demo_app.Environment) async -> String? {
-        do {
+    private func fetchClientID(environment: paypal_ios_sdk_demo_app.Environment) async throws -> String {
             let clientIDRequest = ClientIDRequest()
             let request = try buildClientIDRequest(
                 clientIDRequest: clientIDRequest, environment: environment
             )
             let (data, response) = try await URLSession.shared.performRequest(with: request)
             guard let response = response as? HTTPURLResponse else {
-                throw URLResponseError.serverError
+                throw APIError.httpResponseError
             }
             switch response.statusCode {
             case 200..<300:
                 let clientIDResponse: ClientIDResponse = try parse(from: data)
                 return clientIDResponse.clientID
-            default: throw URLResponseError.dataParsingError
+            default: throw APIError.serverError(statusCode: response.statusCode)
             }
-        } catch {
-            print("Error in fetching clientID")
-            return nil
-        }
     }
     
     private func buildClientIDRequest(
@@ -123,7 +133,7 @@ final class DemoMerchantAPI {
         var completeUrl = environment.baseURL
         completeUrl.append(contentsOf: clientIDRequest.path)
         guard let url = URL(string: completeUrl) else {
-            throw URLResponseError.invalidURL
+            throw APIError.invalidURL
         }
         var request = URLRequest(url: url)
         request.httpMethod = clientIDRequest.method.rawValue

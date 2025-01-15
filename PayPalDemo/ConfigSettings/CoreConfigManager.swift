@@ -9,14 +9,12 @@ class CoreConfigManager {
         self.domain = domain
     }
 
-    func getClientID() async -> String? {
-        await DemoMerchantAPI.sharedService.getClientID(environment: DemoSettings.environment)
+    func getClientID() async throws -> String {
+        try await DemoMerchantAPI.sharedService.getClientID(environment: DemoSettings.environment)
     }
 
     func getCoreConfig() async throws -> CoreConfig {
-        guard let clientID = await getClientID() else {
-            throw CoreSDKError(code: 0, domain: domain, errorDescription: "Error getting clientID")
-        }
+        let clientID = try await getClientID()
         
         return CoreConfig(clientID: clientID, environment: DemoSettings.environment.paypalSDKEnvironment)
     }

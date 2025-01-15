@@ -39,7 +39,7 @@ class CardPaymentViewModel: ObservableObject {
             let completedOrder = try await DemoMerchantAPI.sharedService.completeOrder(orderID: order.id, intent: intent)
             print("✅ Capture returned with orderID: \(completedOrder.id) with status: \(completedOrder.status) ")
             return completedOrder
-        } catch {
+        } catch let error {
             print("❌ Failed in checkout with card: \(error.localizedDescription)")
             throw error
         }

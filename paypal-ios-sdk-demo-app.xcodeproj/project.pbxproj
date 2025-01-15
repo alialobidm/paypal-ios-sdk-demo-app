@@ -23,7 +23,7 @@
 		1058F8162D1F127000D5A7C1 /* DemoSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8152D1F127000D5A7C1 /* DemoSettings.swift */; };
 		1058F8182D1F12C900D5A7C1 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8172D1F12C900D5A7C1 /* Environment.swift */; };
 		1058F81C2D1F152800D5A7C1 /* DemoMerchantAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F81B2D1F152800D5A7C1 /* DemoMerchantAPI.swift */; };
-		1058F8232D1F161300D5A7C1 /* URLResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8222D1F161300D5A7C1 /* URLResponseError.swift */; };
+		1058F8232D1F161300D5A7C1 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8222D1F161300D5A7C1 /* APIError.swift */; };
 		1058F8272D1F1F1500D5A7C1 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8262D1F1F1500D5A7C1 /* Order.swift */; };
 		1058F8292D1F1F6500D5A7C1 /* Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8282D1F1F6500D5A7C1 /* Intent.swift */; };
 		1058F82F2D1F205100D5A7C1 /* EmptyBodyParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F82E2D1F205100D5A7C1 /* EmptyBodyParams.swift */; };
@@ -73,7 +73,7 @@
 		1058F8152D1F127000D5A7C1 /* DemoSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSettings.swift; sourceTree = "<group>"; };
 		1058F8172D1F12C900D5A7C1 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		1058F81B2D1F152800D5A7C1 /* DemoMerchantAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoMerchantAPI.swift; sourceTree = "<group>"; };
-		1058F8222D1F161300D5A7C1 /* URLResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLResponseError.swift; sourceTree = "<group>"; };
+		1058F8222D1F161300D5A7C1 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		1058F8262D1F1F1500D5A7C1 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		1058F8282D1F1F6500D5A7C1 /* Intent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intent.swift; sourceTree = "<group>"; };
 		1058F82E2D1F205100D5A7C1 /* EmptyBodyParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBodyParams.swift; sourceTree = "<group>"; };
@@ -204,7 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				1058F81B2D1F152800D5A7C1 /* DemoMerchantAPI.swift */,
-				1058F8222D1F161300D5A7C1 /* URLResponseError.swift */,
+				1058F8222D1F161300D5A7C1 /* APIError.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -396,7 +396,7 @@
 				1058F8272D1F1F1500D5A7C1 /* Order.swift in Sources */,
 				1058F8142D1F123500D5A7C1 /* CoreConfigManager.swift in Sources */,
 				1001E3082D0CD8520023A03C /* OrderCompleteView.swift in Sources */,
-				1058F8232D1F161300D5A7C1 /* URLResponseError.swift in Sources */,
+				1058F8232D1F161300D5A7C1 /* APIError.swift in Sources */,
 				10A602A52D14D69C0008712F /* CardFormatter.swift in Sources */,
 				1001E3062D0CD8360023A03C /* CardCheckoutView.swift in Sources */,
 			);
