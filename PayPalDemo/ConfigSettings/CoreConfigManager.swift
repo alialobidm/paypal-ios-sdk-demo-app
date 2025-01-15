@@ -3,14 +3,8 @@ import CorePayments
 
 class CoreConfigManager {
 
-    let domain: String
-
-    public init(domain: String) {
-        self.domain = domain
-    }
-
     func getClientID() async throws -> String {
-        try await DemoMerchantAPI.sharedService.getClientID(environment: DemoSettings.environment)
+        try await DemoMerchantAPI.sharedService.getClientID()
     }
 
     func getCoreConfig() async throws -> CoreConfig {

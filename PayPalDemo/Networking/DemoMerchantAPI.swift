@@ -13,9 +13,8 @@ final class DemoMerchantAPI {
     ///   - environment: the current environment
     /// - Returns: a String representing an clientID
     /// - Throws: an error explaining why fetch clientID failed
-    public func getClientID(environment: paypal_ios_sdk_demo_app.Environment) async throws -> String {
-
-        let clientID = try await fetchClientID(environment: environment)
+    public func getClientID() async throws -> String {
+        let clientID = try await fetchClientID()
             return clientID
     }
 
@@ -52,7 +51,15 @@ final class DemoMerchantAPI {
 
     // MARK: Private methods
 
-    private func buildURLRequest<T>(method: String, url: URL, body: T) -> URLRequest where T: Encodable {
+    private func buildBaseURL(with endpoint: String) -> URL? {
+        return URL(string: DemoSettings.environment.baseURL + endpoint)
+    }
+
+    private func buildPayPalURL(with endpoint: String) -> URL? {
+        URL(string: "https://api.sandbox.paypal.com" + endpoint)
+    }
+
+    private func buildURLRequest<T>(method: String, url: URL, body: T?) -> URLRequest where T: Encodable {
         let encoder = JSONEncoder()
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method
@@ -101,15 +108,7 @@ final class DemoMerchantAPI {
         }
     }
 
-    private func buildBaseURL(with endpoint: String) -> URL? {
-        return URL(string: DemoSettings.environment.baseURL + endpoint)
-    }
-
-    private func buildPayPalURL(with endpoint: String) -> URL? {
-        URL(string: "https://api.sandbox.paypal.com" + endpoint)
-    }
-
-    private func fetchClientID(environment: paypal_ios_sdk_demo_app.Environment) async throws -> String {
+    private func fetchClientID() async throws -> String {
         guard let url = buildBaseURL(with: "/client_id") else {
             throw APIError.invalidURL
         }

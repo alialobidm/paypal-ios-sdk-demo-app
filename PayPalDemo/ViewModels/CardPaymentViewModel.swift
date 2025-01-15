@@ -5,7 +5,7 @@ import FraudProtection
 
 class CardPaymentViewModel: ObservableObject {
     
-    let configManager = CoreConfigManager(domain: "Card Payments")
+    let configManager = CoreConfigManager()
 
     private var cardClient: CardClient?
     
