@@ -10,6 +10,7 @@ struct CardCheckoutView: View {
     @StateObject private var validationViewModel = CardCheckoutValidationViewModel()
 
     @State private var showAlert: Bool = false
+    @State private var errorMessage: String? = nil
     @State private var isLoading: Bool = false
 
     var body: some View {
@@ -43,7 +44,7 @@ struct CardCheckoutView: View {
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Error"),
-                    message: Text(validationViewModel.errorMessage),
+                    message: Text(errorMessage ?? "Unknown error"),
                     dismissButton: .default(Text("OK"))
                 )
             }
@@ -61,6 +62,7 @@ struct CardCheckoutView: View {
     private func handleSubmit() {
 
         guard validationViewModel.isValid else {
+            errorMessage = validationViewModel.errorMessage
             showAlert = true
             return
         }
@@ -82,6 +84,7 @@ struct CardCheckoutView: View {
                 )
                 onCheckoutCompleted(completedOrder.id)
             } catch {
+                errorMessage = error.localizedDescription
                 showAlert = true
                 print("Checkout process failed with error: \(error.localizedDescription)")
             }
