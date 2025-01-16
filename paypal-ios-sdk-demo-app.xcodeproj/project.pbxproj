@@ -35,7 +35,6 @@
 		10A602AD2D1612C70008712F /* CardPayments in Frameworks */ = {isa = PBXBuildFile; productRef = 10A602AC2D1612C70008712F /* CardPayments */; };
 		10A602AF2D1612C70008712F /* CorePayments in Frameworks */ = {isa = PBXBuildFile; productRef = 10A602AE2D1612C70008712F /* CorePayments */; };
 		1D694AFE2D0C9EE1005ED7C0 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D694AFD2D0C9EE1005ED7C0 /* CartView.swift */; };
-		3BB5751B2D39612400540AED /* PayPalCheckoutState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5751A2D39611100540AED /* PayPalCheckoutState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,7 +82,6 @@
 		10A602A42D14D69C0008712F /* CardFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFormatter.swift; sourceTree = "<group>"; };
 		10A602A92D160FAB0008712F /* CardCheckoutValidationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCheckoutValidationViewModel.swift; sourceTree = "<group>"; };
 		1D694AFD2D0C9EE1005ED7C0 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
-		3BB5751A2D39611100540AED /* PayPalCheckoutState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPalCheckoutState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,7 +229,6 @@
 			children = (
 				10A602A92D160FAB0008712F /* CardCheckoutValidationViewModel.swift */,
 				1058F8112D1F11A800D5A7C1 /* CardPaymentViewModel.swift */,
-				3BB5751A2D39611100540AED /* PayPalCheckoutState.swift */,
 				1058F8492D28602E00D5A7C1 /* PayPalViewModel.swift */,
 			);
 			path = ViewModels;
@@ -376,7 +373,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3BB5751B2D39612400540AED /* PayPalCheckoutState.swift in Sources */,
 				1001E2DD2D0B99030023A03C /* CheckoutFlow.swift in Sources */,
 				1001E2DD2D0B99030023A03C /* CheckoutFlow.swift in Sources */,
 				1058F8292D1F1F6500D5A7C1 /* Intent.swift in Sources */,

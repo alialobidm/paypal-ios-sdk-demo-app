@@ -3,20 +3,22 @@ import SwiftUI
 class CheckoutCoordinator: ObservableObject {
     @Published var navigationPath: [CheckoutStep] = []
     @Published var cardPaymentViewModel: CardPaymentViewModel?
-    @Published var payPalViewModel: PayPalViewModel?
-    @Published var payPalCheckoutState: PayPalCheckoutState = .none
-    @Published var paypalErrorMessage: String?
     @Published var selectedIntent: Intent = .capture
+    
+    @Published var payPalViewModel: PayPalViewModel?
+    @Published var paypalErrorMessage: String?
+    @Published var isLoading = false
+    @Published var showAlert = false
 
     func startCardCheckout(amount: Double) {
         DispatchQueue.main.async {
             self.cardPaymentViewModel = CardPaymentViewModel()
-            self.navigationPath.append(.checkout(amount: amount))
+            self.navigationPath.append(.cardCheckout(amount: amount))
         }
     }
 
     func startPayPalCheckout(amount: Double) {
-        payPalCheckoutState = .loading
+        isLoading = true
         DispatchQueue.main.async {
             self.payPalViewModel = PayPalViewModel()
             Task {
@@ -27,10 +29,11 @@ class CheckoutCoordinator: ObservableObject {
                         intent: self.selectedIntent
                     )
 
-                    self.payPalCheckoutState = .none
+                    self.isLoading = false
                     self.completeOrder(orderID: completedOrderID)
                 } catch {
-                    self.payPalCheckoutState = .error(error)
+                    self.isLoading = false
+                    self.showAlert = true
                     self.paypalErrorMessage = error.localizedDescription
                 }
             }

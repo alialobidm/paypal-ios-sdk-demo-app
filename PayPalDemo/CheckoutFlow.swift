@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum CheckoutStep: Hashable {
-    case checkout(amount: Double)
+    case cardCheckout(amount: Double)
     case complete(orderID: String)
 }
 
@@ -12,7 +12,8 @@ struct CheckoutFlow: View {
     var body: some View {
         NavigationStack(path: $coordinator.navigationPath) {
             CartView(
-                onPayWithPayPal: { amount in coordinator.startPayPalCheckout(amount: amount)
+                onPayWithPayPal: { amount in
+                    coordinator.startPayPalCheckout(amount: amount)
                 },
                 onPayWithCard: { amount in
                     coordinator.startCardCheckout(amount: amount)
@@ -20,7 +21,7 @@ struct CheckoutFlow: View {
             )
             .navigationDestination(for: CheckoutStep.self) { step in
                 switch step {
-                case .checkout(let amount):
+                case .cardCheckout(let amount):
                     if let viewModel = coordinator.cardPaymentViewModel {
                         CardCheckoutView(
                             viewModel: viewModel,
@@ -39,18 +40,13 @@ struct CheckoutFlow: View {
             }
         }
         .overlay {
-            if case .loading = coordinator.payPalCheckoutState {
+            if coordinator.isLoading {
                 ProgressView("Processing...")
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
             }
         }
-        .onChange(of: coordinator.paypalErrorMessage) { _, newValue in
-            if newValue != nil {
-                showPayPalCheckoutAlert = true
-            }
-        }
-        .alert(isPresented: $showPayPalCheckoutAlert) {
+        .alert(isPresented: $coordinator.showAlert) {
             Alert(
                 title: Text("Error"),
                 message: Text(coordinator.paypalErrorMessage ?? "Unknown error"),
