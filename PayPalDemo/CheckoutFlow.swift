@@ -7,11 +7,13 @@ enum CheckoutStep: Hashable {
 
 struct CheckoutFlow: View {
     @StateObject private var coordinator = CheckoutCoordinator()
+    @State private var showPayPalCheckoutAlert = false
 
     var body: some View {
         NavigationStack(path: $coordinator.navigationPath) {
             CartView(
-                onPayWithPayPal: coordinator.startPayPalCheckout,
+                onPayWithPayPal: { amount in coordinator.startPayPalCheckout(amount: amount)
+                },
                 onPayWithCard: { amount in
                     coordinator.startCardCheckout(amount: amount)
                 }
@@ -35,6 +37,27 @@ struct CheckoutFlow: View {
                     }
                 }
             }
+        }
+        .overlay {
+            if case .loading = coordinator.payPalCheckoutState {
+                ProgressView("Processing...")
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
+            }
+        }
+        .onChange(of: coordinator.paypalErrorMessage) { _, newValue in
+            if newValue != nil {
+                showPayPalCheckoutAlert = true
+            }
+        }
+        .alert(isPresented: $showPayPalCheckoutAlert) {
+            Alert(
+                title: Text("Error"),
+                message: Text(coordinator.paypalErrorMessage ?? "Unknown error"),
+                dismissButton: .default(Text("OK")) {
+                    coordinator.paypalErrorMessage = nil
+                }
+            )
         }
     }
 }

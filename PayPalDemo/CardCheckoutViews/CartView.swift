@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CartView: View {
     @State private var totalAmount: Double = 29.99
-    var onPayWithPayPal: () -> Void
+    var onPayWithPayPal: (Double) -> Void
     var onPayWithCard: (Double) -> Void
 
     var body: some View {
@@ -26,7 +26,9 @@ struct CartView: View {
                     title: "Pay with PayPal",
                     imageName: "paypal_color_monogram@3x",
                     backgroundColor: Color.yellow,
-                    action: onPayWithPayPal
+                    action: {
+                        onPayWithPayPal(totalAmount)
+                    }
                 )
                 
                 PaymentButton(
