@@ -1,33 +1,38 @@
 import SwiftUI
 
 enum CheckoutStep: Hashable {
-    case cart
     case checkout(amount: Double)
-    case complete
+    case complete(orderID: String)
 }
 
 struct CheckoutFlow: View {
-    @State private var navigationPath: [CheckoutStep] = []
-    
+    @StateObject private var coordinator = CheckoutCoordinator()
+
     var body: some View {
-        NavigationStack(path: $navigationPath) {
-            CartView {
-                //TODO: Implement PayPal checkout flow
-            } onPayWithCard: { totalAmount in
-                navigationPath.append(.checkout(amount: totalAmount))
-            }
+        NavigationStack(path: $coordinator.navigationPath) {
+            CartView(
+                onPayWithPayPal: coordinator.startPayPalCheckout,
+                onPayWithCard: { amount in
+                    coordinator.startCardCheckout(amount: amount)
+                }
+            )
             .navigationDestination(for: CheckoutStep.self) { step in
                 switch step {
                 case .checkout(let amount):
-                    CardCheckoutView(totalAmount: amount) {
-                        navigationPath.append(.complete)
+                    if let viewModel = coordinator.cardPaymentViewModel {
+                        CardCheckoutView(
+                            viewModel: viewModel,
+                            amount: amount,
+                            intent: coordinator.selectedIntent,
+                            onCheckoutCompleted: { orderID in
+                                coordinator.completeOrder(orderID: orderID)
+                            }
+                        )
                     }
-                case .complete:
-                    OrderCompleteView {
-                        navigationPath = []
+                case .complete(let orderID):
+                    OrderCompleteView(orderID: orderID) {
+                        coordinator.reset()
                     }
-                default:
-                    EmptyView()
                 }
             }
         }

@@ -1,17 +1,20 @@
 import Foundation
 import CardPayments
 
-class CardCheckoutViewModel: ObservableObject {
+class CardCheckoutValidationViewModel: ObservableObject {
     @Published var errorMessage: String = ""
-    var cardNumber: String = ""
-    var expirationDate: String = ""
-    var cvv: String = ""
     
+    @Published var cardNumber: String = "4111 1111 1111 1111"
+    @Published var expirationDate: String = "01 / 25"
+    @Published var cvv: String = "123"
+
+    private let cardFormatter = CardFormatter()
+
     var isValid: Bool {
-        Card.isCardFormValid(cardNumber: cardNumber, expirationDate: expirationDate, cvv: cvv)
+        return Card.isCardFormValid(cardNumber: cardNumber, expirationDate: expirationDate, cvv: cvv)
     }
-    
-    func submitCard(completion: (Card?) -> Void) {
+
+    func isCardValid(completion: (Card?) -> Void) {
         if isValid {
             let card = Card.createCard(cardNumber: cardNumber, expirationDate: expirationDate, cvv: cvv)
             completion(card)
@@ -19,6 +22,19 @@ class CardCheckoutViewModel: ObservableObject {
             errorMessage = "Invalid card details. Please check and try again."
             completion(nil)
         }
+    }
+
+    func updateCardNumber(_ newValue: String) {
+        cardNumber = cardFormatter.formatFieldWith(cardNumber, field: .cardNumber)
+        cvv = CardType.unknown.getCardType(cardNumber) == .americanExpress ? "1234" : "123"
+    }
+
+    func updateExpirationDate(_ newValue: String) {
+        expirationDate = cardFormatter.formatFieldWith(newValue, field: .expirationDate)
+    }
+
+    func updateCVV(_ newValue: String) {
+        cvv = cardFormatter.formatFieldWith(cvv, field: .cvv)
     }
 }
 
@@ -37,7 +53,7 @@ extension Card {
         let cleanedCardNumber = cardNumber.replacingOccurrences(of: " ", with: "")
         let cleanedExpirationDate = expirationDate.replacingOccurrences(of: " / ", with: "")
 
-        let enabled = cleanedCardNumber.count >= 15 && cleanedCardNumber.count <= 19
+        let enabled = cleanedCardNumber.count >= 15 && cleanedCardNumber.count <= 16
         && cleanedExpirationDate.count == 4 && cvv.count >= 3 && cvv.count <= 4
         return enabled
     }
