@@ -4,7 +4,7 @@ import CorePayments
 /// API Client used to create and process orders on sample merchant server
 final class DemoMerchantAPI {
 
-    static let sharedService = DemoMerchantAPI()
+    static let shared = DemoMerchantAPI()
 
     private init() {}
 
@@ -16,6 +16,11 @@ final class DemoMerchantAPI {
     public func getClientID() async throws -> String {
         let clientID = try await fetchClientID()
             return clientID
+    }
+
+    public func getCoreConfig() async throws -> CoreConfig {
+        let clientID = try await fetchClientID()
+        return CoreConfig(clientID: clientID, environment: DemoSettings.environment.paypalSDKEnvironment)
     }
 
     /// This function replicates a way a merchant may go about creating an order on their server and is not part of the SDK flow.

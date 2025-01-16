@@ -11,9 +11,6 @@ class CardCheckoutValidationViewModel: ObservableObject {
     private let cardFormatter = CardFormatter()
 
     var isValid: Bool {
-        print("cardNumber: \(cardNumber)")
-        print("expirationDate: \(expirationDate)")
-        print("cvv: \(cvv)")
         return Card.isCardFormValid(cardNumber: cardNumber, expirationDate: expirationDate, cvv: cvv)
     }
 

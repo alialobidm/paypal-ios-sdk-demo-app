@@ -4,8 +4,6 @@ import CorePayments
 import FraudProtection
 
 class CardPaymentViewModel: ObservableObject {
-    
-    let configManager = CoreConfigManager()
 
     private var cardClient: CardClient?
     
@@ -16,9 +14,9 @@ class CardPaymentViewModel: ObservableObject {
         sca: SCA
     ) async throws -> Order {
         do {
-            async let config = try await configManager.getCoreConfig()
+            async let config = try await DemoMerchantAPI.shared.getCoreConfig()
 
-            let order = try await DemoMerchantAPI.sharedService.createOrder(
+            let order = try await DemoMerchantAPI.shared.createOrder(
                 orderParams: CreateOrderParams(
                     applicationContext: nil,
                     intent: intent.rawValue,
@@ -36,7 +34,7 @@ class CardPaymentViewModel: ObservableObject {
             let cardResult = try await cardClient.approveOrder(request: cardRequest)
             print("✅ Card approval returned with CardResult \norderID: \(cardResult.orderID) \nstatus: \(String(describing: cardResult.status)) \ndidAttemptThreeDSecureAuthentication: \(cardResult.didAttemptThreeDSecureAuthentication)")
 
-            let completedOrder = try await DemoMerchantAPI.sharedService.completeOrder(orderID: order.id, intent: intent)
+            let completedOrder = try await DemoMerchantAPI.shared.completeOrder(orderID: order.id, intent: intent)
             print("✅ Capture returned with orderID: \(completedOrder.id) with status: \(completedOrder.status) ")
             return completedOrder
         } catch let error {

@@ -19,7 +19,6 @@
 		1058F7E82D1DEF7400D5A7C1 /* FraudProtection in Frameworks */ = {isa = PBXBuildFile; productRef = 1058F7E72D1DEF7400D5A7C1 /* FraudProtection */; };
 		1058F7EC2D1DEF7400D5A7C1 /* PayPalWebPayments in Frameworks */ = {isa = PBXBuildFile; productRef = 1058F7EB2D1DEF7400D5A7C1 /* PayPalWebPayments */; };
 		1058F8122D1F11A800D5A7C1 /* CardPaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8112D1F11A800D5A7C1 /* CardPaymentViewModel.swift */; };
-		1058F8142D1F123500D5A7C1 /* CoreConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8132D1F123500D5A7C1 /* CoreConfigManager.swift */; };
 		1058F8162D1F127000D5A7C1 /* DemoSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8152D1F127000D5A7C1 /* DemoSettings.swift */; };
 		1058F8182D1F12C900D5A7C1 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F8172D1F12C900D5A7C1 /* Environment.swift */; };
 		1058F81C2D1F152800D5A7C1 /* DemoMerchantAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1058F81B2D1F152800D5A7C1 /* DemoMerchantAPI.swift */; };
@@ -69,7 +68,6 @@
 		1001E3052D0CD8360023A03C /* CardCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCheckoutView.swift; sourceTree = "<group>"; };
 		1001E3072D0CD8520023A03C /* OrderCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCompleteView.swift; sourceTree = "<group>"; };
 		1058F8112D1F11A800D5A7C1 /* CardPaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPaymentViewModel.swift; sourceTree = "<group>"; };
-		1058F8132D1F123500D5A7C1 /* CoreConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreConfigManager.swift; sourceTree = "<group>"; };
 		1058F8152D1F127000D5A7C1 /* DemoSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSettings.swift; sourceTree = "<group>"; };
 		1058F8172D1F12C900D5A7C1 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		1058F81B2D1F152800D5A7C1 /* DemoMerchantAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoMerchantAPI.swift; sourceTree = "<group>"; };
@@ -195,7 +193,6 @@
 				1058F8152D1F127000D5A7C1 /* DemoSettings.swift */,
 				1058F8282D1F1F6500D5A7C1 /* Intent.swift */,
 				1058F8172D1F12C900D5A7C1 /* Environment.swift */,
-				1058F8132D1F123500D5A7C1 /* CoreConfigManager.swift */,
 			);
 			path = ConfigSettings;
 			sourceTree = "<group>";
@@ -394,7 +391,6 @@
 				1058F8312D1F207600D5A7C1 /* CreateOrderParams.swift in Sources */,
 				1058F8122D1F11A800D5A7C1 /* CardPaymentViewModel.swift in Sources */,
 				1058F8272D1F1F1500D5A7C1 /* Order.swift in Sources */,
-				1058F8142D1F123500D5A7C1 /* CoreConfigManager.swift in Sources */,
 				1001E3082D0CD8520023A03C /* OrderCompleteView.swift in Sources */,
 				1058F8232D1F161300D5A7C1 /* APIError.swift in Sources */,
 				10A602A52D14D69C0008712F /* CardFormatter.swift in Sources */,
