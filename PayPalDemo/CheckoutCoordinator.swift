@@ -2,9 +2,10 @@ import SwiftUI
 
 class CheckoutCoordinator: ObservableObject {
     @Published var navigationPath: [CheckoutStep] = []
-    @Published var cardPaymentViewModel: CardPaymentViewModel?
     @Published var selectedIntent: Intent = .capture
-    
+
+    @Published var cardPaymentViewModel: CardPaymentViewModel?
+
     @Published var payPalViewModel: PayPalViewModel?
     @Published var paypalErrorMessage: String?
     @Published var isLoading = false

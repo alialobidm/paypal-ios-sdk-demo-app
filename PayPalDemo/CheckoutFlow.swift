@@ -7,7 +7,6 @@ enum CheckoutStep: Hashable {
 
 struct CheckoutFlow: View {
     @StateObject private var coordinator = CheckoutCoordinator()
-    @State private var showPayPalCheckoutAlert = false
 
     var body: some View {
         NavigationStack(path: $coordinator.navigationPath) {
