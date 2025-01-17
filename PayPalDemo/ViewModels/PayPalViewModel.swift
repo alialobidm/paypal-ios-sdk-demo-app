@@ -9,7 +9,7 @@ class PayPalViewModel: ObservableObject {
     func startCheckout(
         amount: Double,
         intent: Intent
-    ) async throws -> String {
+    ) async throws -> String? {
         async let config = try await DemoMerchantAPI.shared.getCoreConfig()
 
         let order = try await DemoMerchantAPI.shared.createOrder(
@@ -26,15 +26,24 @@ class PayPalViewModel: ObservableObject {
             throw NSError(domain: "PayPalWebCheckoutClientError", code: -1, userInfo: [NSLocalizedDescriptionKey: "PayPalWebCheckout client could not be initialized."])
         }
 
-        let paypalCheckoutResult = try await payPalWebCheckoutClient.start(
-            request: PayPalWebCheckoutRequest(
-                orderID: order.id,
-                fundingSource: .paypal)
-        )
-        print("✅ Order approved with orderID: \(paypalCheckoutResult.orderID) and PayerID: \(paypalCheckoutResult.payerID)")
+        do {
+            let paypalCheckoutResult = try await payPalWebCheckoutClient.start(
+                request: PayPalWebCheckoutRequest(
+                    orderID: order.id,
+                    fundingSource: .paypal)
+            )
+            print("✅ Order approved with orderID: \(paypalCheckoutResult.orderID) and PayerID: \(paypalCheckoutResult.payerID)")
 
-        let completedOrder = try await DemoMerchantAPI.shared.completeOrder(orderID: order.id, intent: intent)
-        print("✅ Capture returned with orderID: \(completedOrder.id) with status: \(completedOrder.status) ")
-        return completedOrder.id
+            let completedOrder = try await DemoMerchantAPI.shared.completeOrder(orderID: order.id, intent: intent)
+            print("✅ Capture returned with orderID: \(completedOrder.id) with status: \(completedOrder.status) ")
+            return completedOrder.id
+        } catch {
+            // Convenience method if separate handling of cancel error is needed
+            if PayPalError.isCheckoutCanceled(error) {
+                return nil
+            } else {
+                throw error
+            }
+        }
     }
 }

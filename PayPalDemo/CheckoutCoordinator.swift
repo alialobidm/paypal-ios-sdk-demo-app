@@ -31,7 +31,11 @@ class CheckoutCoordinator: ObservableObject {
                     )
 
                     self.isLoading = false
-                    self.completeOrder(orderID: completedOrderID)
+                    if let completedOrderID {
+                        self.completeOrder(orderID: completedOrderID)
+                    } else {
+                        print("Session Canceled by user")
+                    }
                 } catch {
                     self.isLoading = false
                     self.showAlert = true
