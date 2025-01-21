@@ -14,8 +14,11 @@ This demo app serves as a reference for merchants, aligning with real-world patt
 **📂 Project Structure**
 Where to find key logic:
 - If you are just interested in code to implement server side and SDK API calls, you can skip to `CardPaymentViewModel` or `PayPalViewModel`
-Coordinator:
-- Handles navigation logic and handles states of PayPal Web checkout
+
+CheckoutFlow:
+- SwiftUI view that is the entry point for the checkout process. It sets up the overall navigation structure using a `NavigationStack`, so users can move from cart checkout and finally OrderCompletion
+CheckoutCoordinator(Navigation and Flow Manager):
+- Handles navigation logic and handles loading and error states of flows that do not have a dedicated SwiftUI view (e.g., PayPal Web Checkout)
 CartView: 
 - Displays items in the cart and total amount
 - Buttons to initiate Card or PayPalWeb checkout
@@ -26,7 +29,7 @@ Card Checkout:
 - When complete, the user is navigated to `OrderCompleteView`
 PayPal Web Checkout:
 - No dedicated SwiftUI screen - once triggered, it opens a web flow
-- Becuase there is no dedicated PayPal view, we handle loading and errors in a `coordinator` and in the PayPalViewModel
+- Becuase there is no dedicated PayPal view, we handle loading and errors in a `CheckoutCoordinator`
 - If the user completes the PayPal flow, we capture the order and show `OrderCompleteView` 
 
 
