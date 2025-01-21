@@ -1,10 +1,12 @@
 import SwiftUI
 import PayPalWebPayments
 import CorePayments
+import FraudProtection
 
 class PayPalViewModel: ObservableObject {
 
     private var payPalWebCheckoutClient: PayPalWebCheckoutClient?
+    private var payPalDataCollector: PayPalDataCollector?
 
     func startCheckout(
         amount: Double,
@@ -26,6 +28,9 @@ class PayPalViewModel: ObservableObject {
             throw NSError(domain: "PayPalWebCheckoutClientError", code: -1, userInfo: [NSLocalizedDescriptionKey: "PayPalWebCheckout client could not be initialized."])
         }
 
+        payPalDataCollector = try await PayPalDataCollector(config: config)
+        let payPalClientMetadataID = payPalDataCollector?.collectDeviceData()
+
         do {
             let paypalCheckoutResult = try await payPalWebCheckoutClient.start(
                 request: PayPalWebCheckoutRequest(
@@ -34,7 +39,11 @@ class PayPalViewModel: ObservableObject {
             )
             print("✅ Order approved with orderID: \(paypalCheckoutResult.orderID) and PayerID: \(paypalCheckoutResult.payerID)")
 
-            let completedOrder = try await DemoMerchantAPI.shared.completeOrder(orderID: order.id, intent: intent)
+            let completedOrder = try await DemoMerchantAPI.shared.completeOrder(
+                orderID: order.id,
+                payPalClientMetadataID: payPalClientMetadataID,
+                intent: intent
+            )
             print("✅ Capture returned with orderID: \(completedOrder.id) with status: \(completedOrder.status) ")
             return completedOrder.id
         } catch {
