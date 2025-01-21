@@ -8,25 +8,32 @@ Checkout with PayPal
 Seamless PayPal checkout experience.
 Checkout with Cards
 
-Card payment processing integrated with the PayPal SDK.
-Showcasing PayPal Buttons
-
-Demonstrating how to integrate PayPal-branded buttons for various use cases.
-
 **🎯 Purpose**
 This demo app serves as a reference for merchants, aligning with real-world patterns and code structures they are likely to adopt. By providing a practical and easy-to-follow example, we aim to make PayPal SDK integration smoother and faster for developers.
 
 **📂 Project Structure**
+Where to find key logic:
+- If you are just interested in code to implement server side and SDK API calls, you can skip to `CardPaymentViewModel` or `PayPalViewModel`
+Coordinator:
+- Handles navigation logic and handles states of PayPal Web checkout
+CartView: 
+- Displays items in the cart and total amount
+- Buttons to initiate Card or PayPalWeb checkout
+- Tapping either calls into a `coordinator` that starts the respective flow
+Card Checkout:
+- This uses a SwiftUI screen called `CardCheckoutView` which references a `CardPaymentViewModel`
+- The view model handles network calls for creating order, approving the card and final capture
+- When complete, the user is navigated to `OrderCompleteView`
+PayPal Web Checkout:
+- No dedicated SwiftUI screen - once triggered, it opens a web flow
+- Becuase there is no dedicated PayPal view, we handle loading and errors in a `coordinator` and in the PayPalViewModel
+- If the user completes the PayPal flow, we capture the order and show `OrderCompleteView` 
 
-Store: Sample product listings.
-Cart: Simulated cart functionality.
-Checkout: PayPal and card payment flows.
-Views: UI showcasing PayPal buttons and checkout options.
 
 **🔧 Requirements**
 
 Xcode 15.0+
-iOS 14.0+
+iOS 15.0+
 PayPal iOS SDK
 
 
