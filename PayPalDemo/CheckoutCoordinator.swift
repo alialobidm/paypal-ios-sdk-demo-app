@@ -2,30 +2,55 @@ import SwiftUI
 
 class CheckoutCoordinator: ObservableObject {
     @Published var navigationPath: [CheckoutStep] = []
-    @Published var cardPaymentViewModel: CardPaymentViewModel?
-    @Published var payPalViewModel: PayPalViewModel?
     @Published var selectedIntent: Intent = .capture
-    
+
+    @Published var cardPaymentViewModel: CardPaymentViewModel?
+
+    @Published var payPalViewModel: PayPalViewModel?
+    @Published var paypalErrorMessage: String?
+    @Published var isLoading = false
+    @Published var showAlert = false
+
     func startCardCheckout(amount: Double) {
         DispatchQueue.main.async {
             self.cardPaymentViewModel = CardPaymentViewModel()
-            self.navigationPath.append(.checkout(amount: amount))
+            self.navigationPath.append(.cardCheckout(amount: amount))
         }
     }
-    
-    func startPayPalCheckout() {
+
+    func startPayPalCheckout(amount: Double) {
+        isLoading = true
         DispatchQueue.main.async {
             self.payPalViewModel = PayPalViewModel()
-            self.payPalViewModel?.startCheckout()
+            Task {
+                do {
+                    guard let viewModel = self.payPalViewModel else { return }
+                    let completedOrderID = try await viewModel.startCheckout(
+                        amount: amount,
+                        intent: self.selectedIntent
+                    )
+
+                    self.isLoading = false
+                    if let completedOrderID {
+                        self.completeOrder(orderID: completedOrderID)
+                    } else {
+                        print("Session Canceled by user")
+                    }
+                } catch {
+                    self.isLoading = false
+                    self.showAlert = true
+                    self.paypalErrorMessage = error.localizedDescription
+                }
+            }
         }
     }
-    
+
     func completeOrder(orderID: String) {
         DispatchQueue.main.async {
             self.navigationPath.append(.complete(orderID: orderID))
         }
     }
-    
+
     func reset() {
         DispatchQueue.main.async {
             self.navigationPath.removeAll()

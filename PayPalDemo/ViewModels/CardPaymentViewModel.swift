@@ -6,7 +6,8 @@ import FraudProtection
 class CardPaymentViewModel: ObservableObject {
 
     private var cardClient: CardClient?
-    
+    private var payPalDataCollector: PayPalDataCollector?
+
     func checkoutWith(
         card: Card,
         amount: String,
@@ -34,7 +35,13 @@ class CardPaymentViewModel: ObservableObject {
             let cardResult = try await cardClient.approveOrder(request: cardRequest)
             print("✅ Card approval returned with CardResult \norderID: \(cardResult.orderID) \nstatus: \(String(describing: cardResult.status)) \ndidAttemptThreeDSecureAuthentication: \(cardResult.didAttemptThreeDSecureAuthentication)")
 
-            let completedOrder = try await DemoMerchantAPI.shared.completeOrder(orderID: order.id, intent: intent)
+            payPalDataCollector = try await PayPalDataCollector(config: config)
+            let payPalClientMetadataID = payPalDataCollector?.collectDeviceData()
+
+            let completedOrder = try await DemoMerchantAPI.shared.completeOrder(
+                orderID: order.id,
+                payPalClientMetadataID: payPalClientMetadataID,
+                intent: intent)
             print("✅ Capture returned with orderID: \(completedOrder.id) with status: \(completedOrder.status) ")
             return completedOrder
         } catch let error {
