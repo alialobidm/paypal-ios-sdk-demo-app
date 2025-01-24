@@ -1,6 +1,6 @@
 import SwiftUI
 import PayPalWebPayments
-import CorePayments
+// import CorePayments
 import FraudProtection
 
 class PayPalViewModel: ObservableObject {
