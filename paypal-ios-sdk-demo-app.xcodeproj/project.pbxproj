@@ -729,7 +729,7 @@
 			repositoryURL = "https://github.com/paypal/paypal-ios/";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = "2.0.0-beta2";
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
