@@ -1,4 +1,5 @@
 import SwiftUI
+import PaymentButtons
 
 struct CartView: View {
 
@@ -33,15 +34,13 @@ struct CartView: View {
             Spacer()
             
             VStack(spacing: 10) {
-                PaymentButton(
-                    title: "Pay with PayPal",
-                    imageName: "paypal_color_monogram@3x",
-                    backgroundColor: Color.yellow,
-                    action: {
-                        onPayWithPayPal(totalAmount)
-                    }
-                )
-                
+                PayPalButton.Representable(
+                    size: .expanded,
+                    label: .payWith
+                ){
+                    onPayWithPayPal(totalAmount)
+                }
+                .fixedSize(horizontal: false, vertical: true)
                 PaymentButton(
                     title: "Pay with Card",
                     imageName: nil,
@@ -136,7 +135,7 @@ struct PaymentButton: View {
             .padding()
             .foregroundColor(.white)
             .background(backgroundColor)
-            .cornerRadius(10)
+            .cornerRadius(4)
         }
     }
 }

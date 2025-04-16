@@ -35,6 +35,7 @@
 		10A602AD2D1612C70008712F /* CardPayments in Frameworks */ = {isa = PBXBuildFile; productRef = 10A602AC2D1612C70008712F /* CardPayments */; };
 		10A602AF2D1612C70008712F /* CorePayments in Frameworks */ = {isa = PBXBuildFile; productRef = 10A602AE2D1612C70008712F /* CorePayments */; };
 		1D694AFE2D0C9EE1005ED7C0 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D694AFD2D0C9EE1005ED7C0 /* CartView.swift */; };
+		3BA4574E2DAD719C0057179D /* PaymentButtons in Frameworks */ = {isa = PBXBuildFile; productRef = 3BA4574D2DAD719C0057179D /* PaymentButtons */; };
 		3BB5751D2D39916800540AED /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB5751C2D39916300540AED /* Item.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10A602AF2D1612C70008712F /* CorePayments in Frameworks */,
+				3BA4574E2DAD719C0057179D /* PaymentButtons in Frameworks */,
 				10A602AD2D1612C70008712F /* CardPayments in Frameworks */,
 				1058F7EC2D1DEF7400D5A7C1 /* PayPalWebPayments in Frameworks */,
 				1058F7E82D1DEF7400D5A7C1 /* FraudProtection in Frameworks */,
@@ -121,6 +123,7 @@
 				1001E2D92D0B99030023A03C /* PayPalDemo */,
 				1001E2EA2D0B99120023A03C /* paypal-ios-sdk-demo-appTests */,
 				1001E2F42D0B99120023A03C /* paypal-ios-sdk-demo-appUITests */,
+				3BA4574C2DAD719C0057179D /* Frameworks */,
 				1001E2D82D0B99030023A03C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -237,6 +240,13 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		3BA4574C2DAD719C0057179D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -258,6 +268,7 @@
 				10A602AE2D1612C70008712F /* CorePayments */,
 				1058F7E72D1DEF7400D5A7C1 /* FraudProtection */,
 				1058F7EB2D1DEF7400D5A7C1 /* PayPalWebPayments */,
+				3BA4574D2DAD719C0057179D /* PaymentButtons */,
 			);
 			productName = "paypal-ios-sdk-demo-app";
 			productReference = 1001E2D72D0B99030023A03C /* paypal-ios-sdk-demo-app.app */;
@@ -729,7 +740,7 @@
 			repositoryURL = "https://github.com/paypal/paypal-ios/";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = "2.0.0-beta2";
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -754,6 +765,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 10A602AB2D1612C70008712F /* XCRemoteSwiftPackageReference "paypal-ios" */;
 			productName = CorePayments;
+		};
+		3BA4574D2DAD719C0057179D /* PaymentButtons */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10A602AB2D1612C70008712F /* XCRemoteSwiftPackageReference "paypal-ios" */;
+			productName = PaymentButtons;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

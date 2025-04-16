@@ -5,7 +5,7 @@ class CardCheckoutValidationViewModel: ObservableObject {
     @Published var errorMessage: String = ""
     
     @Published var cardNumber: String = "4111 1111 1111 1111"
-    @Published var expirationDate: String = "01 / 25"
+    @Published var expirationDate: String = "01 / 27"
     @Published var cvv: String = "123"
 
     private let cardFormatter = CardFormatter()
@@ -53,7 +53,7 @@ extension Card {
         let cleanedCardNumber = cardNumber.replacingOccurrences(of: " ", with: "")
         let cleanedExpirationDate = expirationDate.replacingOccurrences(of: " / ", with: "")
 
-        let enabled = cleanedCardNumber.count >= 15 && cleanedCardNumber.count <= 16
+        let enabled = cleanedCardNumber.count >= 15 && cleanedCardNumber.count <= 19
         && cleanedExpirationDate.count == 4 && cvv.count >= 3 && cvv.count <= 4
         return enabled
     }

@@ -1,5 +1,6 @@
 import SwiftUI
 import CardPayments
+import PaymentButtons
 
 struct CardCheckoutView: View {
     @ObservedObject var viewModel: CardPaymentViewModel
@@ -130,7 +131,7 @@ struct SubmitButton: View {
                 .padding()
                 .foregroundColor(.white)
                 .background(Color.blue)
-                .cornerRadius(10)
+                .cornerRadius(4)
         }
     }
 }
