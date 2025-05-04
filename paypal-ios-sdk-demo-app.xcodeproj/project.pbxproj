@@ -85,6 +85,7 @@
 		10A602A92D160FAB0008712F /* CardCheckoutValidationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCheckoutValidationViewModel.swift; sourceTree = "<group>"; };
 		1D694AFD2D0C9EE1005ED7C0 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		3BB5751C2D39916300540AED /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		3BE486B82DC711DE0040FE51 /* paypal-ios-sdk-demo-app-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "paypal-ios-sdk-demo-app-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +121,7 @@
 		1001E2CE2D0B99030023A03C = {
 			isa = PBXGroup;
 			children = (
+				3BE486B82DC711DE0040FE51 /* paypal-ios-sdk-demo-app-Info.plist */,
 				1001E2D92D0B99030023A03C /* PayPalDemo */,
 				1001E2EA2D0B99120023A03C /* paypal-ios-sdk-demo-appTests */,
 				1001E2F42D0B99120023A03C /* paypal-ios-sdk-demo-appUITests */,
@@ -575,6 +577,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "paypal-ios-sdk-demo-app-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -603,6 +606,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "paypal-ios-sdk-demo-app-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
