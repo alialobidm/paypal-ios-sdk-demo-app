@@ -3,12 +3,11 @@ import PaymentButtons
 
 struct CartView: View {
 
-    var onPayWithPayPal: (Double) -> Void
-    var onPayWithCard: (Double) -> Void
+    @EnvironmentObject private var coordinator: CheckoutCoordinator
 
-    let items: [Item] = [
-        Item(name: "White T-Shirt", imageName: "tshirt", amount: 29.99)
-        ]
+    let items: [Item]
+    let isPaymentLink: Bool
+
     private var totalAmount: Double {
         items.reduce(0, { $0 + $1.amount})
     }
@@ -34,21 +33,36 @@ struct CartView: View {
             Spacer()
             
             VStack(spacing: 10) {
-                PayPalButton.Representable(
-                    size: .expanded,
-                    label: .payWith
-                ){
-                    onPayWithPayPal(totalAmount)
-                }
-                .fixedSize(horizontal: false, vertical: true)
-                PaymentButton(
-                    title: "Pay with Card",
-                    imageName: nil,
-                    backgroundColor: Color.black,
-                    action: {
-                        onPayWithCard(totalAmount)
+                if isPaymentLink {
+                    PaymentButton(
+                        title: "Pay Now",
+                        imageName: nil,
+                        backgroundColor: Color.black,
+                        action: {
+                            if let url = URL(string: "https://www.sandbox.paypal.com/ncp/payment/BFXRZ54VKCAQ6") {
+                                coordinator.openPaymentLink(url: url)
+                            }
+                        }
+                    )
+                } else {
+                    PayPalButton.Representable(
+                        size: .expanded,
+                        label: .payWith
+                    ){
+                        coordinator.startPayPalCheckout(amount: totalAmount)
                     }
-                )
+                    .fixedSize(horizontal: false, vertical: true)
+                    PaymentButton(
+                        title: "Pay with Card",
+                        imageName: nil,
+                        backgroundColor: Color.black,
+                        action: {
+                            coordinator.startCardCheckout(amount: totalAmount)
+                        }
+                    )
+                }
+
+
             }
             .padding(.horizontal)
             .padding(.bottom, 40)
@@ -64,14 +78,15 @@ struct CartItemView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 15){
-            HStack{
-                Image(systemName: item.imageName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 50, height: 50)
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(8)
-                
+            HStack(alignment: .center) {
+                if let image1 = item.image {
+                    image1
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(8)
+                }
                 VStack(alignment: .leading) {
                     Text(item.name)
                         .font(.headline)
