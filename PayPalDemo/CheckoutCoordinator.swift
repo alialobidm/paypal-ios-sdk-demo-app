@@ -77,7 +77,7 @@ extension CheckoutCoordinator {
 
     func handleReturnURL(_ url: URL) {
         print("↩️ Returned to app with URL: \(url.absoluteString)")
-        guard url.path == "success" else {
+        guard url.path == "/success" else {
             print("❌ Not a success URL")
             return
         }
