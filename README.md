@@ -1,22 +1,120 @@
-**PayPal iOS SDK Demo App**
+# PayPal iOS Demo App - SDK & Payment Link Integration
 
-This repository contains a SwiftUI demo app that simulates a real-world merchant application, featuring a store, cart, and checkout process. <br>The goal of this app is to showcase core features of the PayPal iOS SDK, providing merchants with sample code and implementation patterns to simplify integration.
+This repository contains a **SwiftUI demo application** that simulates a real-world merchant experience — including a cart and payment/checkout flow. It also demonstrates the steps to receive payments for in-app purchases through direct integration with PayPal. This can be used for both one time and recurring payments (for example: monthly subscriptions).
+Its primary purpose is to **demonstrate two integration options** to accept payments in iOS Apps through PayPal:
 
-**🚀 Version 1.0 Features**
+1. **Direct SDK integration**, offering seamless in-app checkout using native components.
+2. **Payment Link integration**, which redirects users to a PayPal hosted checkout experience via universal links.  
 
-Checkout with PayPal<br>
-Seamless PayPal checkout experience<br>
-Checkout with Cards
+By providing practical examples for both approaches, this app helps developers choose the method that best fits their needs while simplifying implementation.
 
-**🎯 Purpose**
-This demo app serves as a reference for merchants, aligning with real-world patterns and code structures they are likely to adopt.<br> By providing a practical and easy-to-follow example, we aim to make PayPal SDK integration smoother and faster for developers.
+---
 
-**📂 Project Structure**
+### 🚀 Version 1.1 Features
+
+- Checkout with PayPal
+- Checkout with Cards
+- Checkout with Payment Links <code>New</code>
+- Seamless PayPal checkout experience
+##
+### 🔧 Requirements
+
+- Xcode 15.0+
+- iOS 15.0+
+- PayPal Business Account to receive payment
+  - You can create an account by visiting [PayPal.com](https://www.PayPal.com)
+- PayPal iOS SDK (Optional if you're using Payment Links)
+- Payment Link (Optional if you're using PayPal iOS SDK)
+
+---
+
+### 🛠 Setup
+
+Clone this repository:
+```
+git clone https://github.com/paypal-examples/paypal-ios-sdk-demo-app.git
+cd paypal-ios-sdk-demo-app
+```
+Open the project in Xcode.
+Run the app on a simulator or device.
+##
+### 🔗+💳 Steps to create/manage Payment Links (One-Time Payment)
+- Log into PayPal Business Account
+  - Go to [PayPal.com](https://www.paypal.com) and sign in with your business account
+  - Make sure you're logged in with a Business account (not Personal)
+  - If you don’t have a business account, you’ll need to upgrade or create one by clicking on `Sign up`
+- Go to `Pay & Get Paid` -> `Create Payment Links and Buttons` in the navigation menu
+- Enter the product & payment details
+  - Configure the Product Name, Description, Price & Currency
+  - Optional: To let your customer decide the order amount (for example, to decide how many credits to buy), choose type as `Customer set price`
+  - Go to `Checkout` tab and select if shipping address is required (It can be turned off for digital goods)
+  - Go to `Confirmation` tab and use the universal link as `Auto-return URL` to redirect your customer to your app after they complete the payment
+    - This is used to redirect users back to your app automatically through universal links after they complete a payment
+    - It can be used for improving the user experience and ensuring smooth post-payment flow
+- Click `Build It`
+- To find/view the previously created links, click on [Back to saved links and buttons](https://www.sandbox.paypal.com/buttons/saved)
+- Payment Links support PayPal, Venmo, Pay Later, Card Payments and Apple Pay payment methods by default. You can update your preference by visiting [settings](https://www.sandbox.paypal.com/ncp/settings).
+##
+### 🔗+🔄+💳 Steps to create/manage recurring payment links (Subscription)
+- Log into PayPal Business Account
+  - Go to [PayPal.com](https://www.paypal.com) and sign in with your business account
+  - If you don’t have a business account, you’ll need to upgrade or create one by clicking on `Sign up`
+- Go to `PayPal Subscriptions`
+  - Click `Pay & Get Paid` -> `Subscriptions` in the navigation menu
+- Go to `Subscription plans` tab
+  - This view displays all the previously created payment links
+- To create a new payment links, click `Create Plan`
+  - Choose the product or service you want to set up subscriptions for
+  - If you haven't created a product before, you'll need to create a product first by entering:
+    - Product Name
+    - Description
+    - Product Type (Digital or Physical)
+  - Set Up subscription plan
+    - Choose pricing (fixed, quantity-based, tiered, etc.), billing cycle, etc.,
+  - Confirm your plan details and turn it ON
+- To copy the shareable payment link
+  - Go to `Subscription plans` tab
+  - Click on the action menu `vertical three-dot menu` and select `Copy Link`
+  - Use this URL anywhere — in your app, websites, emails, etc.,
+- **Auto-Return URL for recurring payment links**
+  - This is used to redirect users back to your app automatically through universal links after they complete a payment
+  - It can be used for improving the user experience and ensuring smooth post-payment flow
+  - To setup **Auto-Return URL**
+    - Click on `Account Settings` in top-right corner of the navigation menu
+    - In the left menu, click `Website payments` (under `Products & Services`)
+    - Then click `Update` next to `Website preferences`
+    - Update `Auto return` section and click `Save`
+##
+### 🌐 Steps to setup universal links
+WIP
+##
+### 🔙 Steps to receive payment data through Auto-Return URL
+- PDT (Payment Data Transfer) with Auto-Return URL is a combination of two PayPal features that will help you manage post-payment processes seamlessly
+- These features work together to ensure that after a user makes a payment, they are automatically redirected to your app, and you receive all relevant payment information for processing/display
+- It has transaction details such as currency (`cc`), amount (`amt`), transaction id (`tx`) and status (`st`)
+- Implement PDT on your Server
+  - PDT allows you to retrieve detailed transaction data from PayPal after the payment is made
+  - Once the customer is redirected back to your Auto Return URL, you can use the transaction ID (`tx`) parameter in the URL to make a server-side request to PayPal
+  - PayPal will then send you the transaction details via a secure HTTP request
+- To turn it ON
+  - Click on `Account Settings` in top-right corner of the navigation menu
+  - In the left menu, click `Website payments` (under `Products & Services`)
+  - Then click `Update` next to `Website preferences`
+  - Update `Payment data transfer` section
+##
+### 🔔 Steps to receive payment notification through Webhooks
+- Using PayPal Webhooks allows your application to be automatically notified when specific events occur in your PayPal account—like a successful payment, subscription renewal, or refund
+- It can be used by Merchants for real-time backend updates
+- For more details on how to integrate with webhooks - [click here](https://developer.paypal.com/api/rest/webhooks/rest/#link-integratewebhooks)
+
+---
+
+## 📂 Project Structure
+
 - **Where to find key logic**<br>
 If you are just interested in code to implement server side and SDK API calls, you can skip to `CardPaymentViewModel` or `PayPalViewModel`
-
 - **CheckoutFlow**<br>
- SwiftUI view that is the entry point for the checkout process. It sets up the overall navigation structure using a `NavigationStack`, so users can move from cart checkout and finally OrderCompletion
+SwiftUI view that is the entry point for the checkout process. It sets up the overall navigation structure using a `NavigationStack`, so users can move from cart checkout and finally OrderCompletion
 - **CheckoutCoordinator (Navigation and Flow Manager)**<br>
 Handles navigation logic and handles loading and error states of flows that do not have a dedicated SwiftUI view (e.g., PayPal Web Checkout)
 - **CartView**<br>
@@ -28,24 +126,9 @@ This uses a SwiftUI screen called `CardCheckoutView` which references a `CardPay
 The view model handles network calls for creating order, approving the card and final capture<br>
 When complete, the user is navigated to `OrderCompleteView`
 - **PayPal Web Checkout**<br>
-No dedicated SwiftUI screen - once triggered, it opens a web flow<br>
-Becuase there is no dedicated PayPal view, we handle loading and errors in a `CheckoutCoordinator`<br>
+No dedicated SwiftUI screen - once triggered, it opens a web flow
+Because there is no dedicated PayPal view, we handle loading and errors in a `CheckoutCoordinator`<br>
 If the user completes the PayPal flow, we capture the order and show `OrderCompleteView` 
-
-
-**🔧 Requirements**
-
-Xcode 15.0+
-iOS 15.0+
-PayPal iOS SDK
-
-
-**🛠 Setup**
-
-Clone this repository:
-bash
-Copy code
-git clone https://github.com/paypal-examples/paypal-ios-sdk-demo-app.git
-cd paypal-ios-sdk-demo-app
-Open the project in Xcode.
-Run the app on a simulator or device.
+- **Payment Links *(New)***<br>
+Opens a universal link or URL that redirects to the hosted checkout.
+ After completion, app is notified via webhook callback
