@@ -4,7 +4,7 @@ This repository contains a **SwiftUI demo application** that simulates a real-wo
 Its primary purpose is to **demonstrate two integration options** to accept payments in iOS Apps through PayPal:
 
 1. **Direct SDK integration**, offering seamless in-app checkout using native components.
-2. **Payment Link integration**, which redirects users to a PayPal hosted checkout experience via universal links.  
+2. **Payment Links integration**, which redirects users to a PayPal hosted checkout experience via universal links.  
 
 By providing practical examples for both approaches, this app helps developers choose the method that best fits their needs while simplifying implementation.
 
@@ -24,7 +24,7 @@ By providing practical examples for both approaches, this app helps developers c
 - PayPal Business Account to receive payment
   - You can create an account by visiting [PayPal.com](https://www.PayPal.com)
 - PayPal iOS SDK (Optional if you're using Payment Links)
-- Payment Link (Optional if you're using PayPal iOS SDK)
+- Payment Links (Optional if you're using PayPal iOS SDK)
 
 ---
 
@@ -86,7 +86,82 @@ Run the app on a simulator or device.
     - Update `Auto return` section and click `Save`
 ##
 ### 🌐 Steps to setup universal links
-WIP
+- To support universal linking — allowing your app to automatically handle return URLs after a user completes a PayPal Payment Link — follow the steps below.
+  - Host the Apple App Site Association (AASA) file
+    Create the `apple-app-site-association` file
+    To enable universal linking, create a file named **`apple-app-site-association`** (with no `.json` extension) and include the following content:
+
+    ```json
+    {
+      "applinks": {
+        "details": [
+          {
+            "appIDs": [ "YOUR_TEAM_ID.YOUR_BUNDLE_ID" ],
+            "components": [
+              {
+                "/": "/pay/success*",
+                "comment": "Matches return URLs like /pay/success"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    ```
+
+    - Replace `YOUR_TEAM_ID` with your Apple Developer Team ID.
+    - Replace `YOUR_BUNDLE_ID` with your app's bundle identifier.
+
+    - Host this file at the root of your domain (e.g., `https://yourdomain.com/apple-app-site-association`) to allow iOS to verify your app's association with the domain.
+      Must be served with Content-Type: application/json and no redirects
+      Use a valid HTTPS certificate
+- Enable Associated Domains in your app
+  - Open Xcode and go to your app target -> Signing & Capabilities
+  - Add a new capability: Associated Domains
+  - Add the following entry:
+   ```json
+   applinks:yourdomain.com
+   ```
+  - Do not inlcude https://
+- Handle the return URL in your app  
+  - SwiftUI Example:
+    Use the .onOpenURL modifier to handle the return:
+  ```swift
+  @main
+  struct PayPalDemoApp: App {
+    var body: some Scene {
+        WindowGroup {
+            CheckoutFlow()
+                .onOpenURL { url in
+                    if url.path.contains("/pay/success") {
+                        // Parse query params and handle success
+                    }
+                }
+        }
+    }
+  }
+  ```
+  - UIKit Example:
+    - In AppDelegate:
+    ```swift
+    func application(_ application: UIApplication,
+                 continue userActivity: NSUserActivity,
+                 restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+    guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+          let url = userActivity.webpageURL else { return false }
+    // Handle payment success or failure
+    return true
+    }
+    ```
+    - In SceneDelegate.swift:
+    ```
+    func scene(_ scene: UIScene,
+           continue userActivity: NSUserActivity) {
+      if let url = userActivity.webpageURL {
+        // Handle navigation or update state
+      }
+    }
+    ```
 ##
 ### 🔙 Steps to receive payment data through Auto-Return URL
 - PDT (Payment Data Transfer) with Auto-Return URL is a combination of two PayPal features that will help you manage post-payment processes seamlessly
