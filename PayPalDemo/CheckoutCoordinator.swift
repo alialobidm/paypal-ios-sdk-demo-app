@@ -59,3 +59,32 @@ class CheckoutCoordinator: ObservableObject {
         }
     }
 }
+
+import UIKit
+
+extension CheckoutCoordinator {
+    func openPaymentLink(url: URL) {
+        UIApplication.shared.open(url, options: [:]) { success in
+            if success {
+                print("✅ Successfully opened payment link: \(url)")
+            } else {
+                print("❌ Failed to open payment link.")
+                self.paypalErrorMessage = "Unable to open payment link."
+                self.showAlert = true
+            }
+        }
+    }
+
+    func handleReturnURL(_ url: URL) {
+        print("↩️ Returned to app with URL: \(url.absoluteString)")
+        guard url.path == "/success" else {
+            print("❌ Not a success URL")
+            return
+        }
+
+        if let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+           let amount = components.queryItems?.first(where: { $0.name == "amt" })?.value {
+            navigationPath.append(.paymentLinkComplete(amount: amount))
+        }
+    }
+}
