@@ -87,9 +87,9 @@ Run the app on a simulator or device.
 ##
 ### 🌐 Steps to setup universal links
 - To support universal linking — allowing your app to automatically handle return URLs after a user completes a PayPal Payment Link — follow the steps below.
-  - Host the Apple App Site Association (AASA) file
-    Create the `apple-app-site-association` file
-    To enable universal linking, create a file named **`apple-app-site-association`** (with no `.json` extension) and include the following content:
+  - Host the Apple App Site Association (AASA) file 
+    - Create the `apple-app-site-association` file<br>
+    - To enable universal linking, create a file named **`apple-app-site-association`** (with no `.json` extension) and include the following content:
 
     ```json
     {
