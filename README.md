@@ -145,12 +145,14 @@ Run the app on a simulator or device.
     - In AppDelegate:
     ```swift
     func application(_ application: UIApplication,
-                 continue userActivity: NSUserActivity,
-                 restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-    guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+          continue userActivity: NSUserActivity,
+          restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+      guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
           let url = userActivity.webpageURL else { return false }
-    // Handle payment success or failure
-    return true
+      if url.path.contains("/pay/success") {
+        // Handle payment success or failure
+        return true
+      }
     }
     ```
     - In SceneDelegate.swift:
