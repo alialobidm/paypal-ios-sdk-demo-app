@@ -112,7 +112,7 @@ Run the app on a simulator or device.
     - Replace `YOUR_TEAM_ID` with your Apple Developer Team ID.
     - Replace `YOUR_BUNDLE_ID` with your app's bundle identifier.
 
-    - Host this file at the root of your domain (e.g., `https://yourdomain.com/apple-app-site-association`) to allow iOS to verify your app's association with the domain.
+    - Host this file at the root of your domain (e.g., `https://yourdomain.com/.well-known/apple-app-site-association`) to allow iOS to verify your app's association with the domain.
       - Must be served with Content-Type: application/json and no redirects
       - Use a valid HTTPS certificate
 - Enable Associated Domains in your app
