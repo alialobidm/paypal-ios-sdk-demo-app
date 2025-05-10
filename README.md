@@ -8,6 +8,10 @@ Its primary purpose is to **demonstrate two integration options** to accept paym
 
 By providing practical examples for both approaches, this app helps developers choose the method that best fits their needs while simplifying implementation.
 
+| Payment Link | PayPal Native SDK |
+| -------- | ------- |
+| <video src="https://github.com/user-attachments/assets/39fae8f4-8015-4604-9ade-03b242e535a9"> | <video src="https://github.com/user-attachments/assets/85367026-dd67-4b59-881f-ac6162222b80"> |
+
 ---
 
 ### 🚀 Version 1.1 Features
