@@ -10,7 +10,7 @@ By providing practical examples for both approaches, this app helps developers c
 
 | Payment Link | PayPal Native SDK |
 | -------- | ------- |
-| <video src="https://github.com/user-attachments/assets/39fae8f4-8015-4604-9ade-03b242e535a9"> | <video src="https://github.com/user-attachments/assets/85367026-dd67-4b59-881f-ac6162222b80"> |
+| <video src="https://github.com/user-attachments/assets/39fae8f4-8015-4604-9ade-03b242e535a9"> | <video src="https://github.com/user-attachments/assets/7f2ec1ee-fb85-4c0c-9eff-51a1351848d9"> |
 
 ---
 
