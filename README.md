@@ -53,11 +53,15 @@ Run the app on a simulator or device.
   - Optional: To let your customer decide the order amount (for example, to decide how many credits to buy), choose type as `Customer set price`
   - Go to `Checkout` tab and select if shipping address is required (It can be turned off for digital goods)
   - Go to `Confirmation` tab and use the universal link as `Auto-return URL` to redirect your customer to your app after they complete the payment
-    - This is used to redirect users back to your app automatically through universal links after they complete a payment
-    - It can be used for improving the user experience and ensuring smooth post-payment flow
+    - This is used to redirect users back to your app automatically through universal links after they complete a payment along with PDT (Payment Data Transfer)
+    - This is required for order fulfillment and reconciliation. Refer to section below ["How to do order fulfillment using Auto-Return URL, PDT and Webhook"](#how-to-do-order-fulfillment-using-auto-return-url-pdt-and-webhook)
 - Click `Build It`
-- To find/view the previously created links, click on [Back to saved links and buttons](https://www.sandbox.paypal.com/buttons/saved)
-- Payment Links support PayPal, Venmo, Pay Later, Card Payments and Apple Pay payment methods by default. You can update your preference by visiting [settings](https://www.sandbox.paypal.com/ncp/settings).
+- To find/view the previously created links, click on [Back to saved links and buttons](https://www.paypal.com/buttons/saved)
+- Payment Links support PayPal, Venmo, Pay Later, Card Payments and Apple Pay payment methods by default. You can update your preference by visiting [settings](https://www.paypal.com/ncp/settings).
+- For a step-by-step walkthrough, check out the video tutorial on YouTube:
+  - [How to Create Payment Links and Buy Buttons](https://youtu.be/2LsuYc-9iU8?si=_fUr_YjKOYcmY3TL)
+  - [Configuring the Payment Links and Buttons Settings](https://youtu.be/Nx5JznuBr9I?si=3GwGVVLvZUwPUSjE)
+
 ##
 ### 🔗+🔄+💳 Steps to create/manage recurring payment links (Subscription)
 - Log into PayPal Business Account
@@ -83,11 +87,14 @@ Run the app on a simulator or device.
 - **Auto-Return URL for recurring payment links**
   - This is used to redirect users back to your app automatically through universal links after they complete a payment
   - It can be used for improving the user experience and ensuring smooth post-payment flow
-  - To setup **Auto-Return URL**
+  - To setup **Auto-Return URL and PDT** for order fulfillment and reconciliation
     - Click on `Account Settings` in top-right corner of the navigation menu
     - In the left menu, click `Website payments` (under `Products & Services`)
     - Then click `Update` next to `Website preferences`
-    - Update `Auto return` section and click `Save`
+    - Select `On` in `Auto return` section and provide the URL
+    - Select `On` in `Payment data transfer` section
+    - Refer to section below ["How to do order fulfillment using Auto-Return URL, PDT and Webhook"](#how-to-do-order-fulfillment-using-auto-return-url-pdt-and-webhook)
+
 ##
 ### 🌐 Steps to setup universal links
 - To support universal linking — allowing your app to automatically handle return URLs after a user completes a PayPal Payment Link — follow the steps below.
@@ -126,7 +133,7 @@ Run the app on a simulator or device.
    ```json
    applinks:yourdomain.com
    ```
-  - Do not inlcude https://
+  - Do not include https://
 - Handle the return URL in your app  
   - SwiftUI Example:
     Use the .onOpenURL modifier to handle the return:
@@ -169,19 +176,14 @@ Run the app on a simulator or device.
     }
     ```
 ##
-### 🔙 Steps to receive payment data through Auto-Return URL
+### How to do order fulfillment using Auto-Return URL, PDT and Webhook
 - PDT (Payment Data Transfer) with Auto-Return URL is a combination of two PayPal features that will help you manage post-payment processes seamlessly
 - These features work together to ensure that after a user makes a payment, they are automatically redirected to your app, and you receive all relevant payment information for processing/display
 - It has transaction details such as currency (`cc`), amount (`amt`), transaction id (`tx`) and status (`st`)
 - Implement PDT on your Server
   - PDT allows you to retrieve detailed transaction data from PayPal after the payment is made
   - Once the customer is redirected back to your Auto Return URL, you can use the transaction ID (`tx`) parameter in the URL to make a server-side request to PayPal
-  - PayPal will then send you the transaction details via a secure HTTP request
-- To turn it ON
-  - Click on `Account Settings` in top-right corner of the navigation menu
-  - In the left menu, click `Website payments` (under `Products & Services`)
-  - Then click `Update` next to `Website preferences`
-  - Update `Payment data transfer` section
+  - PayPal will then send you the transaction details via a secure HTTPS request
 ##
 ### 🔔 Steps to receive payment notification through Webhooks
 - Using PayPal Webhooks allows your application to be automatically notified when specific events occur in your PayPal account—like a successful payment, subscription renewal, or refund
