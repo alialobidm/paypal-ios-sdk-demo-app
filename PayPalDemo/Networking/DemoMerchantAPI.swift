@@ -8,18 +8,8 @@ final class DemoMerchantAPI {
 
     private init() {}
 
-    /// This function fetches a clientID to initialize any module of the SDK
-    /// - Parameters:
-    ///   - environment: the current environment
-    /// - Returns: a String representing an clientID
-    /// - Throws: an error explaining why fetch clientID failed
-    public func getClientID() async throws -> String {
-        let clientID = try await fetchClientID()
-            return clientID
-    }
-
     public func getCoreConfig() async throws -> CoreConfig {
-        let clientID = try await fetchClientID()
+        let clientID = "AQTfw2irFfemo-eWG4H5UY-b9auKihUpXQ2Engl4G1EsHJe2mkpfUv_SN3Mba0v3CfrL6Fk_ecwv9EOo"
         return CoreConfig(clientID: clientID, environment: DemoSettings.environment.paypalSDKEnvironment)
     }
 
@@ -111,16 +101,5 @@ final class DemoMerchantAPI {
         } catch {
             throw APIError.dataParsingError
         }
-    }
-
-    private func fetchClientID() async throws -> String {
-        guard let url = buildBaseURL(with: "/client_id") else {
-            throw APIError.invalidURL
-        }
-
-        let urlRequest = buildURLRequest(method: "GET", url: url, body: EmptyBodyParams())
-        let data = try await data(for: urlRequest)
-        let clientIDResponse: ClientIDResponse =  try parse(from: data)
-        return clientIDResponse.clientID
     }
 }

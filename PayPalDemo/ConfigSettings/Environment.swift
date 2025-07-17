@@ -7,7 +7,7 @@ enum Environment: String, CaseIterable {
     var baseURL: String {
         switch self {
         case .sandbox:
-            return "https://paypal-mobile-sdk-demo-server-8dacbcd617ba.herokuapp.com"
+            return "https://ppcp-mobile-demo-sandbox-87bbd7f0a27f.herokuapp.com"
 
         case .live:
             return "https://paypal-mobile-sdk-demo-server-8dacbcd617ba.herokuapp.com"
